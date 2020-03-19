@@ -31,8 +31,8 @@ pinnacle of modern programming: the write-only language.
 
 ## The rules
 
-I didn't include environment-setting lines as part of the constraint (so like imports or setting the precision used in an arbitrary package).
-Also, anything that takes longer than like a minute to run has a tqdm statement associated with it.
+I didn't include environment-setting lines as part of the constraint (so like imports or setting the precision used in an arbitrary package, etc.).
+Also, anything that takes longer than like a minute to run has a tqdm progress bar associated with it.  Check out tqdm for more info.
 
 ## What are some one-linerizing tricks I can use?
 
@@ -47,7 +47,7 @@ So the first trick is managing your embeddings.  The following two lines of code
 
 ### Setting local variables
 
-The second is to do an iteration with a single item when you need to use that item more than once.  Consider joining a list to its own divisor:
+The second is to do an iteration with a single item when you need to use that item more than once.  Consider the list [1,2,3] which needs to be used twice in an arbitrary fashion.  You can define a variable i and use it twice that way:
 
     i = [1,2,3]
     i+[j//2 for j in i]
@@ -56,8 +56,7 @@ This can be turned into:
 
     [i+[j//2 for j in i] for i in [[1,2,3]]][0]
 
-In the latter case, you get exactly one iteration, i = [1,2,3], and run a list comprehension, and then out of that comprehension you get a one-item
-list, which you then return the zeroth index of.  So it's almost like setting a variable i.
+In the latter case, you get exactly one iteration of the outer loop, i = [1,2,3], and run a list comprehension, and then out of that comprehension you get a one-item list, which you then return the zeroth index of.  So it's almost like setting a variable i.
 
 ### iterable modifiers
 
@@ -75,6 +74,7 @@ returns [f(0,a_0), f(1,a_1), etc. ...].
 
 a lot of the one-linerizing wouldn't be possible if not for functions like sp.primefactors() or np.sum().  Running through these is enormously useful
 because it's hard to google for them, you get a lot of people just reimplementing there own LCM algorithm if you search 'python least common multiple'.
+Also if you engage in this behavior yourself you may have to write your own library, [which I did](https://github.com/Ngeorgescu/collatz) for the collatz problem.
 
 
 
