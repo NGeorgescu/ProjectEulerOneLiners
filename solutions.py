@@ -81,7 +81,7 @@ np.sum(list(sp.primerange(1,2*10**6)))
 
 
 #%% Problem 11
-m="""08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+h="""08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
@@ -107,7 +107,7 @@ m="""08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 #such that adjacent horizontal values in the new space represent each of the four directions:
 #horizontal, vertical, diagonal up, diagonal down.  Then you loop through each line of each
 #representation and find the max of all of these using a four-item window
-np.max([np.max([[np.prod(r[j:j+4]) for j in range(len(r)-3)] for r in s]) for s in [[np.array(n), np.array(n).T]+ [np.array([(l + [0*k for k in l])[m:]+(l + [0*k for k in l])[:m] for m,l in enumerate(o)]).T for o in [n,[[i for i in j[::-1]] for j in np.array(n).T]]] for n in [[[int(j) for j in re.findall(r'\d+',i)] for i in re.findall('.+',m)]]][0]])
+np.max([np.max([[np.prod(r[j:j+4]) for j in range(len(r)-3)] for r in s]) for s in [[np.array(n), np.array(n).T]+ [np.array([(l + [0*k for k in l])[m:]+(l + [0*k for k in l])[:m] for m,l in enumerate(o)]).T for o in [n,[[i for i in j[::-1]] for j in np.array(n).T]]] for n in [[[int(j) for j in re.findall(r'\d+',i)] for i in re.findall('.+',h)]]][0]])
 
 
 #%% Problem 12
@@ -313,13 +313,24 @@ sorted([[i,1+min(np.where([all([k[-1-l]==k[-1-l-m] for l in range(m)]) for m in 
 
 
 #%% Problem 27
-#this one takes like an hour to run. it generates a list functions, and then for each of
-#these functions it returns the position of the first composite number.  Then it sorts
-#the list and returns the product of the values that generated the function with the highest
-#index of the first composite number
+# this one takes like an hour to run. it generates a list functions, and then for each of
+# these functions it returns the position of the first composite number.  Then it sorts
+# the list and returns the product of the values that generated the function with the highest
+# index of the first composite number
 np.product(sorted([[a,b,min(np.where([not sp.isprime(i**2+a*i+b) for i in range(100)])[0])] for a in tqdm(range(-999,1000)) for b in range(-1000,1001)],key=lambda x:x[-1])[-1][:2])
 
+#%% Problem 28
+# this uses the mathematical property that the spiral is composed of four numbers, the lowest
+# of which follows a quadratic form.  n keeps track of how far out you are, i the lowest of the
+# corner values of the spiral, and then you add 1 at the end because the center is done separately
+1+np.sum([[i+j*(2*n+2) for j in range(4)] for n,i in enumerate([3]+list(np.cumsum(np.cumsum([8 for i in range(1001 //2-1)])+2)+3))])
 
+#%% Problem 29
+#simple
+len(np.unique([a**b for a in range(2,101) for b in range(2,101)]))
 
+#%% Problem 30
+#you just need to split the number into a string and then raise each digit to the fifth power.  Start at 10 to avoid single-digit non-sums
+np.sum([i for i in range(10,1000000) if i==np.sum([int(j)**5 for j in list(str(i))])])
 
 
