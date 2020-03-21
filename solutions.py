@@ -346,3 +346,7 @@ int(np.sum(np.unique([m for l,m in [[int(''.join(i[:a]))*int(''.join(i[a:b])),in
 # a and b are the 'simplified' numerator and denominator, d is the canceled digit, and c is the control that distinguishes between 49/98 94/98 94/89 and 49/89. Given all these possibilities, e,f,g,h is just used to filter the list and then np.product multiplies them together and you extract the denominator.
 np.product([Fraction(e,f) for e,f,g,h in [[a*c//100+d*(11-c//100),b*(c%100)+d*(11-c%100),a,b] for a in range(1,10) for b in range(1,10) for c in [101,110,1001,1010] for d in range(1,10) if a!=b] if e<f and g<h and Fraction(g,h)==Fraction(e,f)]).denominator
 
+#%% Problem 34
+#interestingly enough, the only other example is 40585. 
+np.sum([a for a in range(3,100000) if a == np.sum([sp.factorial(int(b)) for b in str(a)])])
+
