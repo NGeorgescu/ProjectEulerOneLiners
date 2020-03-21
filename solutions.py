@@ -373,5 +373,8 @@ stats.mode([c for c in [int(a+b+np.sqrt(a**2+b**2)) for a in range(1,1000) for b
 #join the list of string range, set it to a, and look for the bth item in the list, and multiply them up
 np.product([[int(a[10**b-1]) for b in range(7)] for a in [''.join([str(a) for a in range(1,1000000)])]][0])
 
+#%% Problem 41
+#first we generate the value of n in a, make the digits with b, and then get the permutations in a flattened list with c and d, which we filter for primes with e
+max([e for e in [int(''.join(d)) for c in [list(it.permutations([str(b) for b in range(1,a)])) for a in range(2,10)] for d in c] if sp.isprime(e)])
 
 
