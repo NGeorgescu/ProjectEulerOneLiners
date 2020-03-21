@@ -337,3 +337,7 @@ np.sum([i for i in range(10,1000000) if i==np.sum([int(j)**5 for j in list(str(i
 #nested iterators up to making 2 pounds given the previous coins.  It's the only way to avoid making 5*10**8 operations.  If you were doing it multiline, you could use a recursive function.
 np.sum([a+b+c+d+e+f+g+h==200 for a in range(0,201,200) for b in range(0,201-a,100) for c in range(0,201-a-b,50) for d in range(0,201-a-b-c,20) for e in range(0,201-a-b-c-d,10) for f in range(0,201-a-b-c-d-e,5) for g in range(0,201-a-b-c-d-e-f,2) for h in range(0,201-a-b-c-d-e-f-g,1)])
 
+#%% Problem 32
+#generate the product and answer (l and m) of all possible splits (a and b) of all possible pandigital numbers (i), and return the unique answers
+int(np.sum(np.unique([m for l,m in [[int(''.join(i[:a]))*int(''.join(i[a:b])),int(''.join(i[b:]))] for a in range(1,8) for b in range(a+1,9) for i in list(it.permutations([str(k) for k in range(1,10)], 9))] if l==m])))
+
