@@ -350,3 +350,7 @@ np.product([Fraction(e,f) for e,f,g,h in [[a*c//100+d*(11-c//100),b*(c%100)+d*(1
 #interestingly enough, the only other example is 40585. 
 np.sum([a for a in range(3,100000) if a == np.sum([sp.factorial(int(b)) for b in str(a)])])
 
+#%% Problem 35
+#we generate the primes with c, check the rotations with the rotation d, and then flatten with e and g. Then we just need the unique values and the total number of items
+len(np.unique([e for g in [[int(''.join(c[d:]+c[:d])) for d in range(len(c))] for c in [[b for b in str(a)] for a in sp.primerange(1,10**6)]] for e in g if all([sp.isprime(f) for f in g])]))
+
