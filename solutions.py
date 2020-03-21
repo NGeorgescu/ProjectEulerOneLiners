@@ -259,9 +259,7 @@ t = """75
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
 # this uses exactly the combinatorial strategy described in the problem. It generates
 # a list of steps to take and then takes them through the entire pyramid, and returns the max
-max(np.sum([[[k[n][o] for n,o in enumerate(np.cumsum(m))] for m in list(
-    [l for l in it.product([0,1],repeat=len(k)) if l[0]==0])] 
-    for k in [[[int(j) for j in re.findall(r'\d+',i)] for i in t.split('\n')]]][0],axis=1))
+max(np.sum([[[k[n][o] for n,o in enumerate(np.cumsum(m))] for m in list([l for l in it.product([0,1],repeat=len(k)) if l[0]==0])] for k in [[[int(j) for j in re.findall(r'\d+',i)] for i in t.split('\n')]]][0],axis=1))
 
 
 #%% Problem 19
@@ -357,3 +355,13 @@ len(np.unique([e for g in [[int(''.join(c[d:]+c[:d])) for d in range(len(c))] fo
 #%% Problem 36
 #you generate the binary (b) and decimal (c) for the list of numbers a, and then compare them to their reverses
 np.sum([int(c) for b,c in [[bin(a)[2:],str(a)] for a in range(10**6)] if b[::-1]==b and c[::-1]==c])
+
+#%% Problem 37
+#a is the list of base primes, which get converted to a string (b), and c controls the forward and d controls the back truncation.  If they both pass, b gets turned into an int and summed up
+np.sum([int(b) for b in [str(a) for a in sp.primerange(10,10**6)] if all([all([sp.isprime(int(b[:c+1])) for c in range(len(b))]),all([sp.isprime(int(b[d:])) for d in range(len(b))])])])
+
+#%% Problem 38
+# we generate a list of number with unique digits, a, which we then create sequential products with b, and accumulate with c.  This gets thrown into a list d if it hits certain criteria, and then the max is found
+max([int(d) for d in [''.join([str(a*b) for b in range(1,6)][:c+1]) for a in range(10**5) if len(list(str(a)))==len(np.unique(list(str(a)))) for c in range(4)] if len(d)==9 and '0' not in list(d) and len(np.unique(list(d)))==9])
+
+
