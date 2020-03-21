@@ -5,6 +5,7 @@ import re
 import collatz
 import sympy as sp
 from tqdm import tqdm
+from fractions import Fraction
 from decimal import Decimal, getcontext, ROUND_DOWN
 from inflect import engine
 getcontext().prec, getcontext().rounding  = 2000, ROUND_DOWN
@@ -340,4 +341,8 @@ np.sum([a+b+c+d+e+f+g+h==200 for a in range(0,201,200) for b in range(0,201-a,10
 #%% Problem 32
 #generate the product and answer (l and m) of all possible splits (a and b) of all possible pandigital numbers (i), and return the unique answers
 int(np.sum(np.unique([m for l,m in [[int(''.join(i[:a]))*int(''.join(i[a:b])),int(''.join(i[b:]))] for a in range(1,8) for b in range(a+1,9) for i in list(it.permutations([str(k) for k in range(1,10)], 9))] if l==m])))
+
+#%% Problem 33
+# a and b are the 'simplified' numerator and denominator, d is the canceled digit, and c is the control that distinguishes between 49/98 94/98 94/89 and 49/89. Given all these possibilities, e,f,g,h is just used to filter the list and then np.product multiplies them together and you extract the denominator.
+np.product([Fraction(e,f) for e,f,g,h in [[a*c//100+d*(11-c//100),b*(c%100)+d*(11-c%100),a,b] for a in range(1,10) for b in range(1,10) for c in [101,110,1001,1010] for d in range(1,10) if a!=b] if e<f and g<h and Fraction(g,h)==Fraction(e,f)]).denominator
 
