@@ -7,6 +7,7 @@ import sympy as sp
 from tqdm import tqdm
 from scipy import stats
 from fractions import Fraction
+from string import ascii_uppercase
 from decimal import Decimal, getcontext, ROUND_DOWN
 from inflect import engine
 getcontext().prec, getcontext().rounding  = 2000, ROUND_DOWN
@@ -377,4 +378,7 @@ np.product([[int(a[10**b-1]) for b in range(7)] for a in [''.join([str(a) for a 
 #first we generate the value of n in a, make the digits with b, and then get the permutations in a flattened list with c and d, which we filter for primes with e
 max([e for e in [int(''.join(d)) for c in [list(it.permutations([str(b) for b in range(1,a)])) for a in range(2,10)] for d in c] if sp.isprime(e)])
 
+#%% Problem 42
+#we get the words with a, the value of each letter with b, filter with c for the triangle numbers found with d
+len([c for c in [np.sum([ascii_uppercase.index(b)+1 for b in a]) for a in re.findall('\w+',open('words.txt').read())] if c in [np.sum(range(d)) for d in range(1,21)]])
 
