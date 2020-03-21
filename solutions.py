@@ -5,6 +5,7 @@ import re
 import collatz
 import sympy as sp
 from tqdm import tqdm
+from scipy import stats
 from fractions import Fraction
 from decimal import Decimal, getcontext, ROUND_DOWN
 from inflect import engine
@@ -363,5 +364,14 @@ np.sum([int(b) for b in [str(a) for a in sp.primerange(10,10**6)] if all([all([s
 #%% Problem 38
 # we generate a list of number with unique digits, a, which we then create sequential products with b, and accumulate with c.  This gets thrown into a list d if it hits certain criteria, and then the max is found
 max([int(d) for d in [''.join([str(a*b) for b in range(1,6)][:c+1]) for a in range(10**5) if len(list(str(a)))==len(np.unique(list(str(a)))) for c in range(4)] if len(d)==9 and '0' not in list(d) and len(np.unique(list(d)))==9])
+
+#%% Problem 39
+#we us a and b to generate the two legs, and calculate the perimeter if it makes a right triangle, filter with c, and find the mode
+stats.mode([c for c in [int(a+b+np.sqrt(a**2+b**2)) for a in range(1,1000) for b in range(1,a+1) if np.sqrt(a**2+b**2)%1==0] if c<1000]).mode[0]
+
+#%% Problem 40
+#join the list of string range, set it to a, and look for the bth item in the list, and multiply them up
+np.product([[int(a[10**b-1]) for b in range(7)] for a in [''.join([str(a) for a in range(1,1000000)])]][0])
+
 
 
