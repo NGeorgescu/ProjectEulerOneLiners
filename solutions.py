@@ -391,3 +391,10 @@ sum([int(''.join(c)) for c in tqdm([b for b in it.permutations([str(a) for a in 
 #the solution to the Pn equation is found with sp.var('Pn n');print(sp.solve(Pn-n*(3*n-1)/2,n)[1]) and you check if n%1==0 i.e. has no decimal component
 min([[c-d for c in tqdm(b,position=0) for d in [e for e in b if e<c] if all([(np.sqrt(24*(c+d*f) + 1)+1)/6%1==0 for f in [-1,1]]) ] for b in [[a*(3*a-1)//2 for a in range(1,2200)]]][0])
 
+#%% Problem 45
+# find the solutions to the equations with sp.var('Tn, Hn, n');print(sp.solve(Tn-n*(n+1)/2,n)[1]);print(sp.solve(Pn-n*(3*n-1)/2,n)[1]) and filter the hexagonal list
+min([c for c in [a*(2*a-1) for a in range(145,100000)] if all([b%1==0 for b in [(np.sqrt(8*c+1)-1)/2,(np.sqrt(24*c+1)+1)/6]])])
+
+
+
+
