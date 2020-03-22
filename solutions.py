@@ -385,3 +385,9 @@ len([c for c in [np.sum([ascii_uppercase.index(b)+1 for b in a]) for a in re.fin
 #%% Problem 43
 #find the permutations of a with b, doing some quick filtering to cut down the possibilities by 10x, then check the modulo of the prime and position with d sums to zero, filtering on c.  then join, int, and sum.
 sum([int(''.join(c)) for c in tqdm([b for b in it.permutations([str(a) for a in range(10)]) if b[0]!='0' and b[3] in '02468' and b[5] in '05' ],position=0,leave=True) if np.sum([int(''.join(c[d+1:d+4]))%sp.prime(d+1) for d in [1,3,4,5,6]])==0])
+
+#%% Problem 44
+#the trick here is to store the list of pentagonal numbers in b, and then check it with the solution to the Pn equation for n.
+#the solution to the Pn equation is found with sp.var('Pn n');print(sp.solve(Pn-n*(3*n-1)/2,n)[1]) and you check if n%1==0 i.e. has no decimal component
+min([[c-d for c in tqdm(b,position=0) for d in [e for e in b if e<c] if all([(np.sqrt(24*(c+d*f) + 1)+1)/6%1==0 for f in [-1,1]]) ] for b in [[a*(3*a-1)//2 for a in range(1,2200)]]][0])
+
