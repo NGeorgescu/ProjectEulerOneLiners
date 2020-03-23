@@ -395,6 +395,6 @@ min([[c-d for c in tqdm(b,position=0) for d in [e for e in b if e<c] if all([(np
 # find the solutions to the equations with sp.var('Tn, Hn, n');print(sp.solve(Tn-n*(n+1)/2,n)[1]);print(sp.solve(Pn-n*(3*n-1)/2,n)[1]) and filter the hexagonal list
 min([c for c in [a*(2*a-1) for a in range(145,100000)] if all([b%1==0 for b in [(np.sqrt(8*c+1)-1)/2,(np.sqrt(24*c+1)+1)/6]])])
 
-
-
-
+#%% Problem 46
+#list of non primes using a, and then checking if that number, d, is not in the list of all possible prime+ 2*squares
+min([d for d in tqdm([a for a in range(3,10000,2) if not sp.isprime(a)],position=0) if d not in [c+2*b**2 for b in range(1,int(np.sqrt(d))) for c in sp.primerange(1,d)]])
