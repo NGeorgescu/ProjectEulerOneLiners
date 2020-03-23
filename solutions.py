@@ -407,3 +407,6 @@ min([k for k,l in [[e,f] for e,f in [[c[0],[list(sp.factorint(d).items()) for d 
 #python handles longs just fine in comprehensions
 int(str(np.sum([a**a for a in range(1,1000)]))[-10:])
 
+#%% Problem 49
+# we take the digits (a), get all possible combinations (b), get the permutations of those combinations (c), check if they are prime (d), get the 3-fold combinations of the permutations of the digits (e), flatten the list one level (f,g), and then filter for the same differences and not being the first answer (h)
+['{:04d}{:04d}{:04d}'.format(*h) for h in [sorted(f) for g in [it.combinations(e,3) for e in [[d for d in [int(''.join(c)) for c in np.unique(list(it.permutations(b)),axis=0)] if sp.isprime(d)] for b in list(it.combinations_with_replacement([str(a) for a in range(1,10)],4))] if len(e)>2] for f in g] if np.ediff1d(np.ediff1d(h))==0 if 1487 not in h][0]
