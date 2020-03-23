@@ -400,7 +400,10 @@ min([c for c in [a*(2*a-1) for a in range(145,100000)] if all([b%1==0 for b in [
 min([d for d in tqdm([a for a in range(3,10000,2) if not sp.isprime(a)],position=0) if d not in [c+2*b**2 for b in range(1,int(np.sqrt(d))) for c in sp.primerange(1,d)]])
 
 #%% Problem 47
-# first this generates a rolling window list (c) which we find the factors (f,l) along with the first number in the sequence (e,k), and we filter the flattened (h,i) list(j) and check that the number of factors is the same, after we check that they all have four factors (g)
+#first this generates a rolling window list (c) which we find the factors (f,l) along with the first number in the sequence (e,k), and we filter the flattened (h,i) list(j) and check that the number of factors is the same, after we check that they all have four factors (g)
 min([k for k,l in [[e,f] for e,f in [[c[0],[list(sp.factorint(d).items()) for d in c]] for c in tqdm([[a+b for a in range(4)] for b in range(2,300000)],position=0,leave=True)] if all([len(g)==len(f) for g in f])] if [len(j) == len(np.unique(j,axis=0)) for j in [[h for i in l for h in i]]][0]])
 
+#%% Problem 48
+#python handles longs just fine in comprehensions
+int(str(np.sum([a**a for a in range(1,1000)]))[-10:])
 
