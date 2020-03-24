@@ -10,6 +10,8 @@ from fractions import Fraction
 from string import ascii_uppercase
 from decimal import Decimal, getcontext, ROUND_DOWN
 from inflect import engine
+from treys import Card, Evaluator
+evaluator = Evaluator()
 getcontext().prec, getcontext().rounding  = 2000, ROUND_DOWN
 
 
@@ -433,4 +435,14 @@ np.unique([o for o in [[n for n in m if len(str(n))==len(str(m[-1]))] for m in [
 #check that all the digits are the same
 np.unique([h for h,g in [[e[0],[int(''.join(sorted(list(str(f))))) for f in e]] for e in [[d for d in c if len(str(d[0]))==len(str(d[-1]))] for c in [[[b*a for b in range(1,7)] for a in range(10**6) if str(a)[0]=='1']]][0]] if all([i==g[0] for i in g])])[0]
 
+#%% Problem 53
+#This one seems self-explanatory.  sum of the true values for the function greater than a million
+np.sum(np.array([sp.factorial(a)/sp.factorial(b)/sp.factorial(a-b) for a in range(1,101) for b in range(a+1)])>10**6)
+
+#%% Problem 54
+#this uses treys.  I know it technically uses an additional line for evaluator = Evaluate(). 
+#You can do it with Evaluator().evaluate(hand) but it just adds computational time. a and b get
+#you a list of lists of rounds, d and c split it into two hands, and the evaluator from the treys
+#library evaluates the hand.  Note: smaller is better.
+np.sum([evaluator.evaluate([],[Card.new(d) for d in c[:5]])<evaluator.evaluate([],[Card.new(d) for d in c[5:]]) for c in [[b[0]+b[-1].lower() for b in a.split(' ')] for a in open('poker.txt').read().split('\n')[:-1]]])
 
