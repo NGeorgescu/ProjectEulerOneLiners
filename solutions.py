@@ -422,7 +422,15 @@ int(str(np.sum([a**a for a in range(1,1000)]))[-10:])
 #stored into k, and then the list is partially filtered with l.  HOWEVER, we first
 #have to check that the first digit isn't a zero, i.e. 03, 13, 23 is against the rules because
 #'03' is really '3'.  You can't just chop the zero from j though because 56003 is valid for 56xx3.  
-#So n checks that all the digits in m have the same length, and o does the final filtering of the lists of len 8.
+#So n checks that all the digits in m have the same length, and o does the final filtering of the 
+#lists of len 8. Then you get the smallest item from the list starting with the smallest item.
 np.unique([o for o in [[n for n in m if len(str(n))==len(str(m[-1]))] for m in [[l for l in k if len(l)>=8] for k in [[[j for j in [int(re.sub('x',str(i),h)) for i in range(10)] if sp.isprime(j)] for h in [''.join(d) for f in range(1,4) for g in range(1,4) for e in [it.permutations([*b,*['x' for c in range(f)]]) for b in list(it.combinations_with_replacement([str(a) for a in range(10)],g))] for d in e]]]][0]] if len(o)>=8],axis=0)[0,0]
+
+#%% Problem 52
+#a gives the numbers we're working with.  Obviously it must have a leading 1. then we use b to
+#make a list of the multiples, d checks that they are all the same length (no sense in looking
+#at numbers of varying length), e and f then sort those digits, and h stores 1x, where g and i
+#check that all the digits are the same
+np.unique([h for h,g in [[e[0],[int(''.join(sorted(list(str(f))))) for f in e]] for e in [[d for d in c if len(str(d[0]))==len(str(d[-1]))] for c in [[[b*a for b in range(1,7)] for a in range(10**6) if str(a)[0]=='1']]][0]] if all([i==g[0] for i in g])])[0]
 
 
