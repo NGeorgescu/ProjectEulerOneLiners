@@ -415,3 +415,14 @@ int(str(np.sum([a**a for a in range(1,1000)]))[-10:])
 #first we make a list of primes (a), length of rolling window (b) and list of windows (c) then we filter the list to just primes (d,e), and store the result in f so that we can grab the maximum length (h) for the list and return the list at that index
 [f[np.argmax([h for g,h in f])] for f in [[[d,e] for d,e in [[int(np.sum(a[c:c+b])),b] for a in [list(sp.primerange(1,5000))] for b in range(1,1000) for c in range(len(a)-b)] if d<10**6 and sp.isprime(d)]]][0][0]
 
+#%% Problem 51
+#A comprehension doozy! a generates a list of digits, b and c inserts those to find the permutations
+#with 'x', d and e flatten the list, f and g control the size (i.e. x3 vs xx3 vs x34, etc.)
+#i and j control the substitutions into each item h of that list, creating a list of lists
+#stored into k, and then the list is partially filtered with l.  HOWEVER, we first
+#have to check that the first digit isn't a zero, i.e. 03, 13, 23 is against the rules because
+#'03' is really '3'.  You can't just chop the zero from j though because 56003 is valid for 56xx3.  
+#So n checks that all the digits in m have the same length, and o does the final filtering of the lists of len 8.
+np.unique([o for o in [[n for n in m if len(str(n))==len(str(m[-1]))] for m in [[l for l in k if len(l)>=8] for k in [[[j for j in [int(re.sub('x',str(i),h)) for i in range(10)] if sp.isprime(j)] for h in [''.join(d) for f in range(1,4) for g in range(1,4) for e in [it.permutations([*b,*['x' for c in range(f)]]) for b in list(it.combinations_with_replacement([str(a) for a in range(10)],g))] for d in e]]]][0]] if len(o)>=8],axis=0)[0,0]
+
+
