@@ -11,6 +11,7 @@ from string import ascii_uppercase
 from decimal import Decimal, getcontext, ROUND_DOWN
 from inflect import engine
 from treys import Card, Evaluator
+import extended as xt
 evaluator = Evaluator()
 getcontext().prec, getcontext().rounding  = 2000, ROUND_DOWN
 
@@ -445,4 +446,13 @@ np.sum(np.array([sp.factorial(a)/sp.factorial(b)/sp.factorial(a-b) for a in rang
 #you a list of lists of rounds, d and c split it into two hands, and the evaluator from the treys
 #library evaluates the hand.  Note: smaller is better.
 np.sum([evaluator.evaluate([],[Card.new(d) for d in c[:5]])<evaluator.evaluate([],[Card.new(d) for d in c[5:]]) for c in [[b[0]+b[-1].lower() for b in a.split(' ')] for a in open('poker.txt').read().split('\n')[:-1]]])
+
+#%% Problem 55
+#here I use my extended library to nest the palindrome addition to a depth of 50.  If it comes back a non-palindrome after up to 50 iterations, 1 is added to the summed list
+np.sum([1 for b in [xt.nest_while(lambda x: x+int(str(x)[::-1]),a,lambda x: str(x)!=str(x)[::-1],max_iter=50) for a in range(10000)] if str(b)!=str(b)[::-1]])
+
+#%% Problem 56
+#pretty straightforward
+np.max([np.sum([int(c) for c in str(a**b)]) for a in range(100) for b in range(100)])
+
 
