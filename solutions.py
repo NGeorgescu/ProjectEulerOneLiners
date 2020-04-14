@@ -455,4 +455,8 @@ np.sum([1 for b in [xt.nest_while(lambda x: x+int(str(x)[::-1]),a,lambda x: str(
 #pretty straightforward
 np.max([np.sum([int(c) for c in str(a**b)]) for a in range(100) for b in range(100)])
 
+#%% Problem 57
+# the nest list prints out 1 more than the sqrt(2), and then it's just a matter of comparing the numerators and denominators
+np.sum([len(str((a-1).numerator))>len(str((a-1).denominator)) for a in xt.nest_list(lambda x: Fraction(2 + 1/x), 2, 1000)])
+
 
