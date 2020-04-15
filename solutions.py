@@ -20,36 +20,29 @@ getcontext().prec, getcontext().rounding  = 2000, ROUND_DOWN
 #this returns the sum of the list from 0 to 999, divisible by either 3 or 5
 np.sum([i for i in range(1000) if i%3==0 or i%5==0])
 
-
 #%% Problem 2
 #the inner brackets do the fibonacci sequence, which is filtered by the outer brackets.  We then find the sum of the filtered list
 int(np.sum([j for j in [sp.fibonacci(i) for i in range(1000)] if j<4*10**6 and j%2==0]))
-
 
 #%% Problem 3
 #simple sympy number theory
 max(sp.primefactors(600851475143))
 
-
 #%% Problem 4
 #the inner bracket generates the products and the outer checks if the string of that number is equal to its reverse
 max([k for k in [i*j for i in range(1,1000) for j in range(1,1000)] if str(k)==str(k)[::-1]])
-
 
 #%% Problem 5
 #numpy has this built in
 np.lcm.reduce(range(1,20))
 
-
 #%% Problem 6
 #I used a one-item comprehension to avoid punching in 100 twice.
 [np.sum(np.arange(n+1))**2 - np.sum(np.arange(n+1)**2) for n in [100]][0]
 
-
 #%% Problem 7
 #Built-in sympy
 sp.prime(10001)
-
 
 #%% Problem 8
 n = """73167176531330624919225119674426574742355349194934
@@ -75,16 +68,13 @@ n = """73167176531330624919225119674426574742355349194934
 #this first converts the problem into a table, j, and then iterates a rolling window through the lines
 [np.max(np.prod([j[i:i+13] for i in np.arange(len(j)-12)],axis=1)) for j in [[int(j) for j in re.findall(r'\d',n)]]][0]
 
-
 #%% Problem 9
 # we first find the pythagorian triples, the scecond filters the list
 [a*b*c for a,b,c in [[a,b,int(np.sqrt(a**2+b**2))] for a,b in list(it.product(np.arange(1,int(1000)),repeat=2)) if np.sqrt(a**2+b**2)%1==0 and a<b] if a+b+c==1000][0]
 
-
 #%% Problem 10
 #built in 
 np.sum(list(sp.primerange(1,2*10**6)))
-
 
 #%% Problem 11
 h="""08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
@@ -115,11 +105,9 @@ h="""08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 #representation and find the max of all of these using a four-item window
 np.max([np.max([[np.prod(r[j:j+4]) for j in range(len(r)-3)] for r in s]) for s in [[np.array(n), np.array(n).T]+ [np.array([(l + [0*k for k in l])[m:]+(l + [0*k for k in l])[:m] for m,l in enumerate(o)]).T for o in [n,[[i for i in j[::-1]] for j in np.array(n).T]]] for n in [[[int(j) for j in re.findall(r'\d+',i)] for i in re.findall('.+',h)]]][0]])
 
-
 #%% Problem 12
 # this inner sequence creates b, a list of triangle number,
 [c for c,d in [[b,len(sp.divisors(b))] for b in [int(np.sum(np.arange(a+1))) for a in range(1,13000)]]  if d>500][0]
-
 
 #%% Problem 13
 n="""37107287533902102798797998220837590246510135740250
@@ -225,26 +213,21 @@ n="""37107287533902102798797998220837590246510135740250
 #add them up, convert to string, and get the first 10 items
 int(str(np.sum([int(i) for i in re.findall(r'\d+',n)]))[:10])
 
-
 #%% Problem 14
 #I built a library just to one-linerize this problem
 np.argmax([collatz.reduce(i,out='dist') for i in range(10**6)])
     
-
 #%% Problem 15
 #this is combinatorially huge, so using itertools is out of the question.  It's a factorial problem.
 [int(sp.factorial(2*n))//int(sp.factorial(n))**2 for n in [20]][0]
-
 
 #%% Problem 16
 # easy
 np.sum([int(i) for i in str(2**1000)])
 
-
 #%% Problem 17
 #the inflect engine generates the text.  We just need to count it all up.
 len(list(it.chain.from_iterable([re.findall('\w',engine().number_to_words(i)) for i in range(1,1001)])))
-
 
 #%% Problem 18
 t = """75
@@ -266,22 +249,18 @@ t = """75
 # a list of steps to take and then takes them through the entire pyramid, and returns the max
 max(np.sum([[[k[n][o] for n,o in enumerate(np.cumsum(m))] for m in list([l for l in it.product([0,1],repeat=len(k)) if l[0]==0])] for k in [[[int(j) for j in re.findall(r'\d+',i)] for i in t.split('\n')]]][0],axis=1))
 
-
 #%% Problem 19
 # find when weekday was equal to 6 (monday is zero-indexed) and return the number of items
 len([k for k in [datetime(i, j, 1, 0,0,0,0).weekday() for i in range(1901,2001) for j in range(1,13)] if k==6])
-
 
 #%% Problem 20
 #just uses the built-in factorial method and then gets the digits and adds them up
 np.sum([int(j) for j in str(int(sp.factorial(100)))])
 
-
 #%% Problem 21
 # this one finds the list of proper divisors, and then finds where following that index twice
 # gets you back to the same spot without just staying where you are (i.e. perfect numbers) 
 [np.sum(np.unique([k for k in j[:10000] if j[j[k]]==k and j[k]!=k])) for j in [[int(np.sum(sp.divisors(i)[:-1])) for i in range(100000)]]][0]
-
 
 #%% Problem 22
 # first create a dictionary of values (there's probably a library for that but I didn't feel
@@ -289,23 +268,19 @@ np.sum([int(j) for j in str(int(sp.factorial(100)))])
 # and adds up those numbers' products
 np.sum([[(n+1)*np.sum([d[j] for j in i]) for n,i in enumerate(sorted(re.findall(r'\w+',open('names.txt').read())))] for d in [{k:v for k,v in zip(list('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),np.arange(26)+1)}]][0])
 
-
 #%% Problem 23
 # This one takes like an hour or two to run.  it generates a list of abundant numbers, d,
 # and then looks through each number up to 28123 to see if two abundant numbers can add up
 # to it
 np.sum([[i for i in tqdm(range(28123)) if all([i-k not in d for k in d])] for d in [[j for j in range(28123) if np.sum(sp.divisors(j)[:-1])>j]]][0])
 
-
 #%% Problem 24
 # This works
 int(''.join([str(i) for i in list(it.permutations(range(10)))[999999]]))
 
-
 #%% Problem 25
 # This works
 min(np.where(np.array([len(str(sp.fibonacci(i))) for i in range(10000)])>=1000)[0])
-
 
 #%% Problem 26
 # you need 2000 decimals of precision.  This block o' text takes each number,
@@ -314,7 +289,6 @@ min(np.where(np.array([len(str(sp.fibonacci(i))) for i in range(10000)])>=1000)[
 # of the string, trying to match the longest repeat sequence.  It then returns 
 # the shortest match.  it then sorts the list by the matches and returns the original number
 sorted([[i,1+min(np.where([all([k[-1-l]==k[-1-l-m] for l in range(m)]) for m in range(1,getcontext().prec//2)])[0])] for i,k in [[j,str(Decimal(1) / Decimal(j))] for j in range(1,1000)] if len(k)>getcontext().prec//2],key = lambda x:x[1])[-1][0]
-
 
 #%% Problem 27
 # this one takes like an hour to run. it generates a list functions, and then for each of
@@ -456,7 +430,6 @@ np.sum([1 for b in [xt.nest_while(lambda x: x+int(str(x)[::-1]),a,lambda x: str(
 np.max([np.sum([int(c) for c in str(a**b)]) for a in range(100) for b in range(100)])
 
 #%% Problem 57
-# the nest list prints out 1 more than the sqrt(2), and then it's just a matter of comparing the numerators and denominators
+#the nest list prints out 1 more than the sqrt(2), and then it's just a matter of comparing the numerators and denominators
 np.sum([len(str((a-1).numerator))>len(str((a-1).denominator)) for a in xt.nest_list(lambda x: Fraction(2 + 1/x), 2, 1000)])
-
 
