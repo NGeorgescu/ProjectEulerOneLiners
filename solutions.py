@@ -434,9 +434,10 @@ np.max([np.sum([int(c) for c in str(a**b)]) for a in range(100) for b in range(1
 np.sum([len(str((a-1).numerator))>len(str((a-1).denominator)) for a in xt.nest_list(lambda x: Fraction(2 + 1/x), 2, 1000)])
 
 #%% Problem 58
-#this took a few tries.  Ultimately we find the number of primes in a new layer (b,c), add it to an accumulated total (d), and compare that to the running total of all layers (e), and then look for the minimum index of the resulting array of fractions that's over 0.1.  Then we multiply by 2 and add 3 (because we threw away the middle piece)
+#We find the number of primes in a new layer (b,c), add it to an accumulated total (d), and compare that to the running total of all layers (e), and then look for the minimum index of the resulting array of fractions that's over 0.1.  Then we multiply by 2 and add 3 (because we threw away the middle piece)
 min(np.where(np.array([[d/e for d,e in zip(np.cumsum([0]+[np.sum([sp.isprime(4*c**2-2*c+1 + 2*b*c) for b in range(4)]) for c in range(1,a)]),1+4*np.arange(a))] for a in [14000]][0][1:])<.1)[0])*2+3
 
-
-
+#%% Problem 59
+#First we map (a) an int to the file to read (b) then we try all the possible keys, and then we look at the XORed result for the word 'the'.  The text is about Euler, and the key is 'exp'.
+np.sum([d for d in [[np.array(b) ^ np.tile(c,len(b)//3)  for c in list(it.product(97+np.arange(26), repeat=3))] for b in [[int(a) for a in open('cipher.txt').read().split(',')]]][0]  if ' the ' in ''.join([chr(e) for e in d])])
 
