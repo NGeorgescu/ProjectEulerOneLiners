@@ -446,3 +446,7 @@ np.sum([d for d in [[np.array(b) ^ np.tile(c,len(b)//3)  for c in list(it.produc
 #first you stringify the primes (b) and then the nesting starts. for each combination (d) in the previous layer (c), you add on a prime (e) and check if it works for each permutation (f).  If it does, then 
 min([sum([int(g) for g in h]) for h in xt.nest(lambda c: [[str(e),*d] for d in tqdm(c,position=0,leave=True) for e in sp.primerange(3,int(d[0])) if all([sp.isprime(int(''.join(f))) for f in it.permutations([*d,str(e)],2)])], [[str(b)] for b in sp.primerange(3,10000)], 4)])
 
+
+
+
+
