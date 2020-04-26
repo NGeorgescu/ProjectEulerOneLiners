@@ -441,3 +441,8 @@ min(np.where(np.array([[d/e for d,e in zip(np.cumsum([0]+[np.sum([sp.isprime(4*c
 #First we map (a) an int to the file to read (b) then we try all the possible keys, and then we look at the XORed result for the word 'the'.  The text is about Euler, and the key is 'exp'.
 np.sum([d for d in [[np.array(b) ^ np.tile(c,len(b)//3)  for c in list(it.product(97+np.arange(26), repeat=3))] for b in [[int(a) for a in open('cipher.txt').read().split(',')]]][0]  if ' the ' in ''.join([chr(e) for e in d])])
 
+#%% Problem 60
+#This code is highly golfed because a brute force takes forever! First you get a list of primes, then you keep tacking on 4 times, each successive layer checking that the permutations of the numbers are all prime. 
+#first you stringify the primes (b) and then the nesting starts. for each combination (d) in the previous layer (c), you add on a prime (e) and check if it works for each permutation (f).  If it does, then 
+min([sum([int(g) for g in h]) for h in xt.nest(lambda c: [[str(e),*d] for d in tqdm(c,position=0,leave=True) for e in sp.primerange(3,int(d[0])) if all([sp.isprime(int(''.join(f))) for f in it.permutations([*d,str(e)],2)])], [[str(b)] for b in sp.primerange(3,10000)], 4)])
+
