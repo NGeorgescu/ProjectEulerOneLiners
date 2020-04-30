@@ -427,12 +427,21 @@ min([k for k,l in [[e,f] for e,f in [[c[0],[list(sp.factorint(d).items()) for d 
 int(str(np.sum([a**a for a in range(1,1000)]))[-10:])
 
 #%% Problem 49
-# we take the digits (a), get all possible combinations (b), get the permutations of those combinations (c), check if they are prime (d), get the 3-fold combinations of the permutations of the digits (e), flatten the list one level (f,g), and then filter for the same differences and not being the first answer (h)
-['{:04d}{:04d}{:04d}'.format(*h) for h in [sorted(f) for g in [it.combinations(e,3) for e in [[d for d in [int(''.join(c)) for c in np.unique(list(it.permutations(b)),axis=0)] if sp.isprime(d)] for b in list(it.combinations_with_replacement([str(a) for a in range(1,10)],4))] if len(e)>2] for f in g] if np.ediff1d(np.ediff1d(h))==0 if 1487 not in h][0]
+#we take the digits (a), get all possible combinations (b), get the permutations of 
+#those combinations (c), check if they are prime (d), get the 3-fold combinations of 
+#the permutations of the digits (e), flatten the list one level (f,g), and then filter
+#for the same differences and not being the first answer (h)
+['{:04d}{:04d}{:04d}'.format(*h) for h in [sorted(f) for g in [it.combinations(e,3) \
+ for e in [[d for d in [int(''.join(c)) for c in np.unique(list(it.permutations(b)),\
+ axis=0)] if sp.isprime(d)] for b in list(it.combinations_with_replacement([str(a) \
+ for a in range(1,10)],4))] if len(e)>2] for f in g] if np.ediff1d(np.ediff1d(h))==0 \
+ if 1487 not in h][0]
 
 #%% Problem 50
 #first we make a list of primes (a), length of rolling window (b) and list of windows (c) then we filter the list to just primes (d,e), and store the result in f so that we can grab the maximum length (h) for the list and return the list at that index
-[f[np.argmax([h for g,h in f])] for f in [[[d,e] for d,e in [[int(np.sum(a[c:c+b])),b] for a in [list(sp.primerange(1,5000))] for b in range(1,1000) for c in range(len(a)-b)] if d<10**6 and sp.isprime(d)]]][0][0]
+[f[np.argmax([h for g,h in f])] for f in [[[d,e] for d,e in [[int(np.sum(a[c:c+b])),b]\
+ for a in [list(sp.primerange(1,5000))] for b in range(1,1000) for c in range(len(a)-b)]\
+ if d<10**6 and sp.isprime(d)]]][0][0]
 
 #%% Problem 51
 #A comprehension doozy! a generates a list of digits, b and c inserts those to find the permutations
@@ -455,22 +464,30 @@ np.unique([o for o in [[n for n in m if len(str(n))==len(str(m[-1]))] for m in \
 #make a list of the multiples, d checks that they are all the same length (no sense in looking
 #at numbers of varying length), e and f then sort those digits, and h stores 1x, where g and i
 #check that all the digits are the same
-np.unique([h for h,g in [[e[0],[int(''.join(sorted(list(str(f))))) for f in e]] for e in [[d for d in c if len(str(d[0]))==len(str(d[-1]))] for c in [[[b*a for b in range(1,7)] for a in range(10**6) if str(a)[0]=='1']]][0]] if all([i==g[0] for i in g])])[0]
+np.unique([h for h,g in [[e[0],[int(''.join(sorted(list(str(f))))) for f in e]] \
+ for e in [[d for d in c if len(str(d[0]))==len(str(d[-1]))] for c in [[[b*a for \
+ b in range(1,7)] for a in range(10**6) if str(a)[0]=='1']]][0]] if all([i==g[0] \
+ for i in g])])[0]
 
 #%% Problem 53
 #This one seems self-explanatory.  sum of the true values for the function greater than a million
-np.sum(np.array([sp.factorial(a)/sp.factorial(b)/sp.factorial(a-b) for a in range(1,101) for b in range(a+1)])>10**6)
+np.sum(np.array([sp.factorial(a)/sp.factorial(b)/sp.factorial(a-b) for a in range(1,101)\
+ for b in range(a+1)])>10**6)
 
 #%% Problem 54
 #this uses treys.  I know it technically uses an additional line for evaluator = Evaluate(). 
 #You can do it with Evaluator().evaluate(hand) but it just adds computational time. a and b get
 #you a list of lists of rounds, d and c split it into two hands, and the evaluator from the treys
 #library evaluates the hand.  Note: smaller is better.
-np.sum([evaluator.evaluate([],[Card.new(d) for d in c[:5]])<evaluator.evaluate([],[Card.new(d) for d in c[5:]]) for c in [[b[0]+b[-1].lower() for b in a.split(' ')] for a in open('poker.txt').read().split('\n')[:-1]]])
+np.sum([evaluator.evaluate([],[Card.new(d) for d in c[:5]])<evaluator.evaluate([],
+ [Card.new(d) for d in c[5:]]) for c in [[b[0]+b[-1].lower() for b in a.split(' ')] 
+ for a in open('poker.txt').read().split('\n')[:-1]]])
 
 #%% Problem 55
-#here I use my extended library to nest the palindrome addition to a depth of 50.  If it comes back a non-palindrome after up to 50 iterations, 1 is added to the summed list
-np.sum([1 for b in [xt.nest_while(lambda x: x+int(str(x)[::-1]),a,lambda x: str(x)!=str(x)[::-1],max_iter=50) for a in range(10000)] if str(b)!=str(b)[::-1]])
+#here I use my extended library to nest the palindrome addition to a depth of 50.  
+#If it comes back a non-palindrome after up to 50 iterations, 1 is added to the summed list
+np.sum([1 for b in [xt.nest_while(lambda x: x+int(str(x)[::-1]),a,lambda x: \
+ str(x)!=str(x)[::-1],max_iter=50) for a in range(10000)] if str(b)!=str(b)[::-1]])
 
 #%% Problem 56
 #pretty straightforward
@@ -479,7 +496,8 @@ np.max([np.sum([int(c) for c in str(a**b)]) for a in range(100) for b in range(1
 #%% Problem 57
 #the nest list prints out 1 more than the sqrt(2), and then it's just a matter of 
 #comparing the numerators and denominators
-np.sum([len(str((a-1).numerator))>len(str((a-1).denominator)) for a in xt.nest_list(lambda x: Fraction(2 + 1/x), 2, 1000)])
+np.sum([len(str((a-1).numerator))>len(str((a-1).denominator)) for a in \
+  xt.nest_list(lambda x: Fraction(2 + 1/x), 2, 1000)])
 
 #%% Problem 58
 #We find the number of primes in a new layer (b,c), add it to an accumulated total 
@@ -491,7 +509,9 @@ min(np.where(np.array([[d/e for d,e in zip(np.cumsum([0]+[np.sum([sp.isprime( \
   for a in [14000]][0][1:])<.1)[0])*2+3
 
 #%% Problem 59
-#First we map (a) an int to the file to read (b) then we try all the possible keys, and then we look at the XORed result for the word 'the'.  The text is about Euler, and the key is 'exp'.
+#First we map (a) an int to the file to read (b) then we try all the possible keys, 
+#and then we look at the XORed result for the word 'the'.  
+#The text is about Euler, and the key is 'exp'.
 np.sum([d for d in [[np.array(b) ^ np.tile(c,len(b)//3)  for c in list(it.product(97+ \
  np.arange(26), repeat=3))] for b in [[int(a) for a in open('cipher.txt').read().split( \
  ',')]]][0]  if ' the ' in ''.join([chr(e) for e in d])])
@@ -517,6 +537,7 @@ sum([[int(o) for o,n in k] for k in [xt.nest(lambda h: [[j,*i] for i in h for j 
  for f in [[[str(c),d] for c,d in [[b*((a-2)*b+(4-a))//2,a] for b in range(1,200) \
  for a in range(3,9)] if len(str(c))==4]]][0] if k[0][0][:2]==k[-1][0][2:]][0])
 
-#%%
-    
-    
+#%% Problem 62
+#we gather by the sorted digits, then we look for the min.
+min([min(a) for a in xt.gather_by(np.arange(10000)**3,lambda x: str(sorted(str(x)))) if len(a)==5])
+
