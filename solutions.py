@@ -21,7 +21,8 @@ getcontext().prec, getcontext().rounding  = 2000, ROUND_DOWN
 np.sum([i for i in range(1000) if i%3==0 or i%5==0])
 
 #%% Problem 2
-#the inner brackets do the fibonacci sequence, which is filtered by the outer brackets.  We then find the sum of the filtered list
+#the inner brackets do the fibonacci sequence, which is filtered by the outer 
+#brackets.  We then find the sum of the filtered list
 int(np.sum([j for j in [sp.fibonacci(i) for i in range(1000)] if j<4*10**6 and j%2==0]))
 
 #%% Problem 3
@@ -29,8 +30,10 @@ int(np.sum([j for j in [sp.fibonacci(i) for i in range(1000)] if j<4*10**6 and j
 max(sp.primefactors(600851475143))
 
 #%% Problem 4
-#the inner bracket generates the products and the outer checks if the string of that number is equal to its reverse
-max([k for k in [i*j for i in range(1,1000) for j in range(1,1000)] if str(k)==str(k)[::-1]])
+#the inner bracket generates the products and the outer checks if the string of 
+#that number is equal to its reverse
+max([k for k in [i*j for i in range(1,1000) for j in range(1,1000)] \
+     if str(k)==str(k)[::-1]])
 
 #%% Problem 5
 #numpy has this built in
@@ -65,12 +68,16 @@ n = """73167176531330624919225119674426574742355349194934
 84580156166097919133875499200524063689912560717606
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450"""
-#this first converts the problem into a table, j, and then iterates a rolling window through the lines
-[np.max(np.prod([j[i:i+13] for i in np.arange(len(j)-12)],axis=1)) for j in [[int(j) for j in re.findall(r'\d',n)]]][0]
+#this first converts the problem into a table, j, and then iterates a rolling 
+#window through the lines
+[np.max(np.prod([j[i:i+13] for i in np.arange(len(j)-12)],axis=1)) for j in 
+ [[int(j) for j in re.findall(r'\d',n)]]][0]
 
 #%% Problem 9
 # we first find the pythagorian triples, the scecond filters the list
-[a*b*c for a,b,c in [[a,b,int(np.sqrt(a**2+b**2))] for a,b in list(it.product(np.arange(1,int(1000)),repeat=2)) if np.sqrt(a**2+b**2)%1==0 and a<b] if a+b+c==1000][0]
+[a*b*c for a,b,c in [[a,b,int(np.sqrt(a**2+b**2))] for a,b in list(it.product(\
+   np.arange(1,int(1000)),repeat=2)) if np.sqrt(a**2+b**2)%1==0 and a<b] if \
+   a+b+c==1000][0]
 
 #%% Problem 10
 #built in 
@@ -103,11 +110,16 @@ h="""08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 #such that adjacent horizontal values in the new space represent each of the four directions:
 #horizontal, vertical, diagonal up, diagonal down.  Then you loop through each line of each
 #representation and find the max of all of these using a four-item window
-np.max([np.max([[np.prod(r[j:j+4]) for j in range(len(r)-3)] for r in s]) for s in [[np.array(n), np.array(n).T]+ [np.array([(l + [0*k for k in l])[m:]+(l + [0*k for k in l])[:m] for m,l in enumerate(o)]).T for o in [n,[[i for i in j[::-1]] for j in np.array(n).T]]] for n in [[[int(j) for j in re.findall(r'\d+',i)] for i in re.findall('.+',h)]]][0]])
+np.max([np.max([[np.prod(r[j:j+4]) for j in range(len(r)-3)] for r in s]) for \
+ s in [[np.array(n), np.array(n).T]+ [np.array([(l + [0*k for k in l])[m:]+ \
+ (l + [0*k for k in l])[:m] for m,l in enumerate(o)]).T for o in [n,[[i for i \ 
+ in j[::-1]] for j in np.array(n).T]]] for n in [[[int(j) for j in re.findall(r'\d+',\
+ i)] for i in re.findall('.+',h)]]][0]])
 
 #%% Problem 12
 # this inner sequence creates b, a list of triangle number,
-[c for c,d in [[b,len(sp.divisors(b))] for b in [int(np.sum(np.arange(a+1))) for a in range(1,13000)]]  if d>500][0]
+[c for c,d in [[b,len(sp.divisors(b))] for b in [int(np.sum(np.arange(a+1))) \
+ for a in range(1,13000)]]  if d>500][0]
 
 #%% Problem 13
 n="""37107287533902102798797998220837590246510135740250
@@ -218,7 +230,8 @@ int(str(np.sum([int(i) for i in re.findall(r'\d+',n)]))[:10])
 np.argmax([collatz.reduce(i,out='dist') for i in range(10**6)])
     
 #%% Problem 15
-#this is combinatorially huge, so using itertools is out of the question.  It's a factorial problem.
+#this is combinatorially huge, so using itertools is out of the question.  
+#It's a factorial problem.
 [int(sp.factorial(2*n))//int(sp.factorial(n))**2 for n in [20]][0]
 
 #%% Problem 16
@@ -227,7 +240,8 @@ np.sum([int(i) for i in str(2**1000)])
 
 #%% Problem 17
 #the inflect engine generates the text.  We just need to count it all up.
-len(list(it.chain.from_iterable([re.findall('\w',engine().number_to_words(i)) for i in range(1,1001)])))
+len(list(it.chain.from_iterable([re.findall('\w',engine().number_to_words(i)) \
+ for i in range(1,1001)])))
 
 #%% Problem 18
 t = """75
@@ -245,34 +259,44 @@ t = """75
 91 71 52 38 17 14 91 43 58 50 27 29 48
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
-# this uses exactly the combinatorial strategy described in the problem. It generates
-# a list of steps to take and then takes them through the entire pyramid, and returns the max
-max(np.sum([[[k[n][o] for n,o in enumerate(np.cumsum(m))] for m in list([l for l in it.product([0,1],repeat=len(k)) if l[0]==0])] for k in [[[int(j) for j in re.findall(r'\d+',i)] for i in t.split('\n')]]][0],axis=1))
+#this uses exactly the combinatorial strategy described in the problem. It generates
+#a list of steps to take and then takes them through the entire pyramid, and returns 
+#the max
+max(np.sum([[[k[n][o] for n,o in enumerate(np.cumsum(m))] for m in list([l for \
+ l in it.product([0,1],repeat=len(k)) if l[0]==0])] for k in [[[int(j) for j in \
+ re.findall(r'\d+',i)] for i in t.split('\n')]]][0],axis=1))
 
 #%% Problem 19
-# find when weekday was equal to 6 (monday is zero-indexed) and return the number of items
-len([k for k in [datetime(i, j, 1, 0,0,0,0).weekday() for i in range(1901,2001) for j in range(1,13)] if k==6])
+#find when weekday was equal to 6 (monday is zero-indexed) and return the number 
+#of items
+len([k for k in [datetime(i, j, 1, 0,0,0,0).weekday() for i in range(1901,2001) \
+ for j in range(1,13)] if k==6])
 
 #%% Problem 20
 #just uses the built-in factorial method and then gets the digits and adds them up
 np.sum([int(j) for j in str(int(sp.factorial(100)))])
 
 #%% Problem 21
-# this one finds the list of proper divisors, and then finds where following that index twice
-# gets you back to the same spot without just staying where you are (i.e. perfect numbers) 
-[np.sum(np.unique([k for k in j[:10000] if j[j[k]]==k and j[k]!=k])) for j in [[int(np.sum(sp.divisors(i)[:-1])) for i in range(100000)]]][0]
+# this one finds the list of proper divisors, and then finds where following that 
+# index twice gets you back to the same spot without just staying where you are 
+# (i.e. perfect numbers) 
+[np.sum(np.unique([k for k in j[:10000] if j[j[k]]==k and j[k]!=k])) for j in \
+ [[int(np.sum(sp.divisors(i)[:-1])) for i in range(100000)]]][0]
 
 #%% Problem 22
 # first create a dictionary of values (there's probably a library for that but I didn't feel
 # like searching for it). then it just loops through the names, getting the index i, and value, n,
 # and adds up those numbers' products
-np.sum([[(n+1)*np.sum([d[j] for j in i]) for n,i in enumerate(sorted(re.findall(r'\w+',open('names.txt').read())))] for d in [{k:v for k,v in zip(list('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),np.arange(26)+1)}]][0])
+np.sum([[(n+1)*np.sum([d[j] for j in i]) for n,i in enumerate(sorted(re.findall(\
+ r'\w+',open('names.txt').read())))] for d in [{k:v for k,v in \
+ zip(list('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),np.arange(26)+1)}]][0])
 
 #%% Problem 23
 # This one takes like an hour or two to run.  it generates a list of abundant numbers, d,
 # and then looks through each number up to 28123 to see if two abundant numbers can add up
 # to it
-np.sum([[i for i in tqdm(range(28123)) if all([i-k not in d for k in d])] for d in [[j for j in range(28123) if np.sum(sp.divisors(j)[:-1])>j]]][0])
+np.sum([[i for i in tqdm(range(28123)) if all([i-k not in d for k in d])] for d \
+ in [[j for j in range(28123) if np.sum(sp.divisors(j)[:-1])>j]]][0])
 
 #%% Problem 24
 # This works
@@ -288,20 +312,25 @@ min(np.where(np.array([len(str(sp.fibonacci(i))) for i in range(10000)])>=1000)[
 # is non-terminating.  It then uses the decimal library and checks from the back
 # of the string, trying to match the longest repeat sequence.  It then returns 
 # the shortest match.  it then sorts the list by the matches and returns the original number
-sorted([[i,1+min(np.where([all([k[-1-l]==k[-1-l-m] for l in range(m)]) for m in range(1,getcontext().prec//2)])[0])] for i,k in [[j,str(Decimal(1) / Decimal(j))] for j in range(1,1000)] if len(k)>getcontext().prec//2],key = lambda x:x[1])[-1][0]
+sorted([[i,1+min(np.where([all([k[-1-l]==k[-1-l-m] for l in range(m)]) for m in \
+ range(1,getcontext().prec//2)])[0])] for i,k in [[j,str(Decimal(1) / Decimal(j))] \
+ for j in range(1,1000)] if len(k)>getcontext().prec//2],key = lambda x:x[1])[-1][0]
 
 #%% Problem 27
 # this one takes like an hour to run. it generates a list functions, and then for each of
 # these functions it returns the position of the first composite number.  Then it sorts
 # the list and returns the product of the values that generated the function with the highest
 # index of the first composite number
-np.product(sorted([[a,b,min(np.where([not sp.isprime(i**2+a*i+b) for i in range(100)])[0])] for a in tqdm(range(-999,1000)) for b in range(-1000,1001)],key=lambda x:x[-1])[-1][:2])
+np.product(sorted([[a,b,min(np.where([not sp.isprime(i**2+a*i+b) for i in \
+ range(100)])[0])] for a in tqdm(range(-999,1000)) for b in range(-1000,1001)], \
+ key=lambda x:x[-1])[-1][:2])
 
 #%% Problem 28
 # this uses the mathematical property that the spiral is composed of four numbers, the lowest
 # of which follows a quadratic form.  n keeps track of how far out you are, i the lowest of the
 # corner values of the spiral, and then you add 1 at the end because the center is done separately
-1+np.sum([[i+j*(2*n+2) for j in range(4)] for n,i in enumerate([3]+list(np.cumsum(np.cumsum([8 for i in range(1001 //2-1)])+2)+3))])
+1+np.sum([[i+j*(2*n+2) for j in range(4)] for n,i in enumerate([3]+ \
+ list(np.cumsum(np.cumsum([8 for i in range(1001 //2-1)])+2)+3))])
 
 #%% Problem 29
 #simple
@@ -313,15 +342,22 @@ np.sum([i for i in range(10,1000000) if i==np.sum([int(j)**5 for j in list(str(i
 
 #%% Problem 31
 #nested iterators up to making 2 pounds given the previous coins.  It's the only way to avoid making 5*10**8 operations.  If you were doing it multiline, you could use a recursive function.
-np.sum([a+b+c+d+e+f+g+h==200 for a in range(0,201,200) for b in range(0,201-a,100) for c in range(0,201-a-b,50) for d in range(0,201-a-b-c,20) for e in range(0,201-a-b-c-d,10) for f in range(0,201-a-b-c-d-e,5) for g in range(0,201-a-b-c-d-e-f,2) for h in range(0,201-a-b-c-d-e-f-g,1)])
+np.sum([a+b+c+d+e+f+g+h==200 for a in range(0,201,200) for b in range(0,201-a,100) \
+ for c in range(0,201-a-b,50) for d in range(0,201-a-b-c,20) for e in \
+ range(0,201-a-b-c-d,10) for f in range(0,201-a-b-c-d-e,5) for g in \
+ range(0,201-a-b-c-d-e-f,2) for h in range(0,201-a-b-c-d-e-f-g,1)])
 
 #%% Problem 32
 #generate the product and answer (l and m) of all possible splits (a and b) of all possible pandigital numbers (i), and return the unique answers
-int(np.sum(np.unique([m for l,m in [[int(''.join(i[:a]))*int(''.join(i[a:b])),int(''.join(i[b:]))] for a in range(1,8) for b in range(a+1,9) for i in list(it.permutations([str(k) for k in range(1,10)], 9))] if l==m])))
+int(np.sum(np.unique([m for l,m in [[int(''.join(i[:a]))*int(''.join(i[a:b])),\
+ int(''.join(i[b:]))] for a in range(1,8) for b in range(a+1,9) for i in \
+ list(it.permutations([str(k) for k in range(1,10)], 9))] if l==m])))
 
 #%% Problem 33
 # a and b are the 'simplified' numerator and denominator, d is the canceled digit, and c is the control that distinguishes between 49/98 94/98 94/89 and 49/89. Given all these possibilities, e,f,g,h is just used to filter the list and then np.product multiplies them together and you extract the denominator.
-np.product([Fraction(e,f) for e,f,g,h in [[a*c//100+d*(11-c//100),b*(c%100)+d*(11-c%100),a,b] for a in range(1,10) for b in range(1,10) for c in [101,110,1001,1010] for d in range(1,10) if a!=b] if e<f and g<h and Fraction(g,h)==Fraction(e,f)]).denominator
+np.product([Fraction(e,f) for e,f,g,h in [[a*c//100+d*(11-c//100),b*(c%100)+d*(11-c%100) \
+ ,a,b] for a in range(1,10) for b in range(1,10) for c in [101,110,1001,1010] \
+ for d in range(1,10) if a!=b] if e<f and g<h and Fraction(g,h)==Fraction(e,f)]).denominator
 
 #%% Problem 34
 #interestingly enough, the only other example is 40585. 
@@ -329,15 +365,21 @@ np.sum([a for a in range(3,100000) if a == np.sum([sp.factorial(int(b)) for b in
 
 #%% Problem 35
 #we generate the primes with c, check the rotations with the rotation d, and then flatten with e and g. Then we just need the unique values and the total number of items
-len(np.unique([e for g in [[int(''.join(c[d:]+c[:d])) for d in range(len(c))] for c in [[b for b in str(a)] for a in sp.primerange(1,10**6)]] for e in g if all([sp.isprime(f) for f in g])]))
+len(np.unique([e for g in [[int(''.join(c[d:]+c[:d])) for d in range(len(c))] \
+ for c in [[b for b in str(a)] for a in sp.primerange(1,10**6)]] for e in g if \
+ all([sp.isprime(f) for f in g])]))
 
 #%% Problem 36
 #you generate the binary (b) and decimal (c) for the list of numbers a, and then compare them to their reverses
 np.sum([int(c) for b,c in [[bin(a)[2:],str(a)] for a in range(10**6)] if b[::-1]==b and c[::-1]==c])
 
 #%% Problem 37
-#a is the list of base primes, which get converted to a string (b), and c controls the forward and d controls the back truncation.  If they both pass, b gets turned into an int and summed up
-np.sum([int(b) for b in [str(a) for a in sp.primerange(10,10**6)] if all([all([sp.isprime(int(b[:c+1])) for c in range(len(b))]),all([sp.isprime(int(b[d:])) for d in range(len(b))])])])
+#a is the list of base primes, which get converted to a string (b), and c controls
+#the forward and d controls the back truncation.  If they both pass, b gets turned 
+#into an int and summed up
+np.sum([int(b) for b in [str(a) for a in sp.primerange(10,10**6)] if all([all( \
+ [sp.isprime(int(b[:c+1])) for c in range(len(b))]),all([sp.isprime(int(b[d:])) \
+ for d in range(len(b))])])])
 
 #%% Problem 38
 # we generate a list of number with unique digits, a, which we then create sequential products with b, and accumulate with c.  This gets thrown into a list d if it hits certain criteria, and then the max is found
@@ -401,7 +443,12 @@ int(str(np.sum([a**a for a in range(1,1000)]))[-10:])
 #'03' is really '3'.  You can't just chop the zero from j though because 56003 is valid for 56xx3.  
 #So n checks that all the digits in m have the same length, and o does the final filtering of the 
 #lists of len 8. Then you get the smallest item from the list starting with the smallest item.
-np.unique([o for o in [[n for n in m if len(str(n))==len(str(m[-1]))] for m in [[l for l in k if len(l)>=8] for k in [[[j for j in [int(re.sub('x',str(i),h)) for i in range(10)] if sp.isprime(j)] for h in [''.join(d) for f in range(1,4) for g in range(1,4) for e in [it.permutations([*b,*['x' for c in range(f)]]) for b in list(it.combinations_with_replacement([str(a) for a in range(10)],g))] for d in e]]]][0]] if len(o)>=8],axis=0)[0,0]
+np.unique([o for o in [[n for n in m if len(str(n))==len(str(m[-1]))] for m in \
+ [[l for l in k if len(l)>=8] for k in [[[j for j in [int(re.sub('x',str(i),h)) \
+ for i in range(10)] if sp.isprime(j)] for h in [''.join(d) for f in range(1,4) \ 
+ for g in range(1,4) for e in [it.permutations([*b,*['x' for c in range(f)]]) \
+ for b in list(it.combinations_with_replacement([str(a) for a in range(10)],g))] \
+ for d in e]]]][0]] if len(o)>=8],axis=0)[0,0]
 
 #%% Problem 52
 #a gives the numbers we're working with.  Obviously it must have a leading 1. then we use b to
@@ -430,23 +477,46 @@ np.sum([1 for b in [xt.nest_while(lambda x: x+int(str(x)[::-1]),a,lambda x: str(
 np.max([np.sum([int(c) for c in str(a**b)]) for a in range(100) for b in range(100)])
 
 #%% Problem 57
-#the nest list prints out 1 more than the sqrt(2), and then it's just a matter of comparing the numerators and denominators
+#the nest list prints out 1 more than the sqrt(2), and then it's just a matter of 
+#comparing the numerators and denominators
 np.sum([len(str((a-1).numerator))>len(str((a-1).denominator)) for a in xt.nest_list(lambda x: Fraction(2 + 1/x), 2, 1000)])
 
 #%% Problem 58
-#We find the number of primes in a new layer (b,c), add it to an accumulated total (d), and compare that to the running total of all layers (e), and then look for the minimum index of the resulting array of fractions that's over 0.1.  Then we multiply by 2 and add 3 (because we threw away the middle piece)
-min(np.where(np.array([[d/e for d,e in zip(np.cumsum([0]+[np.sum([sp.isprime(4*c**2-2*c+1 + 2*b*c) for b in range(4)]) for c in range(1,a)]),1+4*np.arange(a))] for a in [14000]][0][1:])<.1)[0])*2+3
+#We find the number of primes in a new layer (b,c), add it to an accumulated total 
+#(d), and compare that to the running total of all layers (e), and then look for 
+#the minimum index of the resulting array of fractions that's over 0.1.  Then we 
+# multiply by 2 and add 3 (because we threw away the middle piece)
+min(np.where(np.array([[d/e for d,e in zip(np.cumsum([0]+[np.sum([sp.isprime( \
+  4*c**2-2*c+1+2*b*c) for b in range(4)]) for c in range(1,a)]),1+4*np.arange(a))] \
+  for a in [14000]][0][1:])<.1)[0])*2+3
 
 #%% Problem 59
 #First we map (a) an int to the file to read (b) then we try all the possible keys, and then we look at the XORed result for the word 'the'.  The text is about Euler, and the key is 'exp'.
-np.sum([d for d in [[np.array(b) ^ np.tile(c,len(b)//3)  for c in list(it.product(97+np.arange(26), repeat=3))] for b in [[int(a) for a in open('cipher.txt').read().split(',')]]][0]  if ' the ' in ''.join([chr(e) for e in d])])
+np.sum([d for d in [[np.array(b) ^ np.tile(c,len(b)//3)  for c in list(it.product(97+ \
+ np.arange(26), repeat=3))] for b in [[int(a) for a in open('cipher.txt').read().split( \
+ ',')]]][0]  if ' the ' in ''.join([chr(e) for e in d])])
 
 #%% Problem 60
-#This code is highly golfed because a brute force takes forever! First you get a list of primes, then you keep tacking on 4 times, each successive layer checking that the permutations of the numbers are all prime. 
-#first you stringify the primes (b) and then the nesting starts. for each combination (d) in the previous layer (c), you add on a prime (e) and check if it works for each permutation (f).  If it does, then 
-min([sum([int(g) for g in h]) for h in xt.nest(lambda c: [[str(e),*d] for d in tqdm(c,position=0,leave=True) for e in sp.primerange(3,int(d[0])) if all([sp.isprime(int(''.join(f))) for f in it.permutations([*d,str(e)],2)])], [[str(b)] for b in sp.primerange(3,10000)], 4)])
+#This code is highly golfed because a brute force takes forever! First you get a 
+#list of primes, then you keep tacking on 4 times, each successive layer checking 
+#that the permutations of the numbers are all prime. Each tqdm represents one layer.
+#first you stringify the primes (b) and then the nesting starts. for each combination 
+#(d) in the previous layer (c), you add on a prime (e) and check if it works for each 
+#permutation (f).  The list (h) is converted (g) and the minimum is found.
+min([sum([int(g) for g in h]) for h in xt.nest(lambda c: [[str(e),*d] for d in \
+ tqdm(c,position=0,leave=True) for e in sp.primerange(3,int(d[0])) if \
+ all([sp.isprime(int(''.join(f))) for f in it.permutations([*d,str(e)],2)])], \
+ [[str(b)] for b in sp.primerange(3,10000)], 4)])
 
+#%% Problem 61
+#the list (a,c) and angularity (b,d) of the numbers is cataloged (f), and recursively (h)
+#added (i,j) the original list (g), at each step checking (l,m) that the angularity is new
+#and the list is filtered (k) for the last matching the first, and (o,n)
+sum([[int(o) for o,n in k] for k in [xt.nest(lambda h: [[j,*i] for i in h for j in \
+ f if j[0][-2:]==i[0][0][:2] and j[1] not in [l for m,l in i]],[[g] for g in f],5) \
+ for f in [[[str(c),d] for c,d in [[b*((a-2)*b+(4-a))//2,a] for b in range(1,200) \
+ for a in range(3,9)] if len(str(c))==4]]][0] if k[0][0][:2]==k[-1][0][2:]][0])
 
-
-
-
+#%%
+    
+    
