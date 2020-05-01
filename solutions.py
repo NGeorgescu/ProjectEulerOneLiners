@@ -337,24 +337,31 @@ np.product(sorted([[a,b,min(np.where([not sp.isprime(i**2+a*i+b) for i in \
 len(np.unique([a**b for a in range(2,101) for b in range(2,101)]))
 
 #%% Problem 30
-#you just need to split the number into a string and then raise each digit to the fifth power.  Start at 10 to avoid single-digit non-sums
+#you just need to split the number into a string and then raise each digit to 
+#the fifth power.  Start at 10 to avoid single-digit non-sums
 np.sum([i for i in range(10,1000000) if i==np.sum([int(j)**5 for j in list(str(i))])])
 
 #%% Problem 31
-#nested iterators up to making 2 pounds given the previous coins.  It's the only way to avoid making 5*10**8 operations.  If you were doing it multiline, you could use a recursive function.
+#nested iterators up to making 2 pounds given the previous coins.  It's the only 
+#way to avoid making 5*10**8 operations.  If you were doing it multiline, you could 
+#use a recursive function.
 np.sum([a+b+c+d+e+f+g+h==200 for a in range(0,201,200) for b in range(0,201-a,100) \
  for c in range(0,201-a-b,50) for d in range(0,201-a-b-c,20) for e in \
  range(0,201-a-b-c-d,10) for f in range(0,201-a-b-c-d-e,5) for g in \
  range(0,201-a-b-c-d-e-f,2) for h in range(0,201-a-b-c-d-e-f-g,1)])
 
 #%% Problem 32
-#generate the product and answer (l and m) of all possible splits (a and b) of all possible pandigital numbers (i), and return the unique answers
+#generate the product and answer (l and m) of all possible splits (a and b) of 
+#all possible pandigital numbers (i), and return the unique answers
 int(np.sum(np.unique([m for l,m in [[int(''.join(i[:a]))*int(''.join(i[a:b])),\
  int(''.join(i[b:]))] for a in range(1,8) for b in range(a+1,9) for i in \
  list(it.permutations([str(k) for k in range(1,10)], 9))] if l==m])))
 
 #%% Problem 33
-# a and b are the 'simplified' numerator and denominator, d is the canceled digit, and c is the control that distinguishes between 49/98 94/98 94/89 and 49/89. Given all these possibilities, e,f,g,h is just used to filter the list and then np.product multiplies them together and you extract the denominator.
+# a and b are the 'simplified' numerator and denominator, d is the canceled digit, 
+#and c is the control that distinguishes between 49/98 94/98 94/89 and 49/89. Given 
+#all these possibilities, e,f,g,h is just used to filter the list and then np.product 
+#multiplies them together and you extract the denominator.
 np.product([Fraction(e,f) for e,f,g,h in [[a*c//100+d*(11-c//100),b*(c%100)+d*(11-c%100) \
  ,a,b] for a in range(1,10) for b in range(1,10) for c in [101,110,1001,1010] \
  for d in range(1,10) if a!=b] if e<f and g<h and Fraction(g,h)==Fraction(e,f)]).denominator
@@ -364,13 +371,15 @@ np.product([Fraction(e,f) for e,f,g,h in [[a*c//100+d*(11-c//100),b*(c%100)+d*(1
 np.sum([a for a in range(3,100000) if a == np.sum([sp.factorial(int(b)) for b in str(a)])])
 
 #%% Problem 35
-#we generate the primes with c, check the rotations with the rotation d, and then flatten with e and g. Then we just need the unique values and the total number of items
+#we generate the primes with c, check the rotations with the rotation d, and then 
+#flatten with e and g. Then we just need the unique values and the total number of items
 len(np.unique([e for g in [[int(''.join(c[d:]+c[:d])) for d in range(len(c))] \
  for c in [[b for b in str(a)] for a in sp.primerange(1,10**6)]] for e in g if \
  all([sp.isprime(f) for f in g])]))
 
 #%% Problem 36
-#you generate the binary (b) and decimal (c) for the list of numbers a, and then compare them to their reverses
+#you generate the binary (b) and decimal (c) for the list of numbers a, and then 
+#compare them to their reverses
 np.sum([int(c) for b,c in [[bin(a)[2:],str(a)] for a in range(10**6)] if b[::-1]==b and c[::-1]==c])
 
 #%% Problem 37
@@ -382,45 +391,74 @@ np.sum([int(b) for b in [str(a) for a in sp.primerange(10,10**6)] if all([all( \
  for d in range(len(b))])])])
 
 #%% Problem 38
-# we generate a list of number with unique digits, a, which we then create sequential products with b, and accumulate with c.  This gets thrown into a list d if it hits certain criteria, and then the max is found
-max([int(d) for d in [''.join([str(a*b) for b in range(1,6)][:c+1]) for a in range(10**5) if len(list(str(a)))==len(np.unique(list(str(a)))) for c in range(4)] if len(d)==9 and '0' not in list(d) and len(np.unique(list(d)))==9])
+# we generate a list of number with unique digits, a, which we then create 
+#sequential products with b, and accumulate with c.  This gets thrown into a 
+#list d if it hits certain criteria, and then the max is found
+max([int(d) for d in [''.join([str(a*b) for b in range(1,6)][:c+1]) for a in \
+ range(10**5) if len(list(str(a)))==len(np.unique(list(str(a)))) for c in \
+ range(4)] if len(d)==9 and '0' not in list(d) and len(np.unique(list(d)))==9])
 
 #%% Problem 39
-#we us a and b to generate the two legs, and calculate the perimeter if it makes a right triangle, filter with c, and find the mode
-stats.mode([c for c in [int(a+b+np.sqrt(a**2+b**2)) for a in range(1,1000) for b in range(1,a+1) if np.sqrt(a**2+b**2)%1==0] if c<1000]).mode[0]
+#we us a and b to generate the two legs, and calculate the perimeter if it makes
+#a right triangle, filter with c, and find the mode
+stats.mode([c for c in [int(a+b+np.sqrt(a**2+b**2)) for a in range(1,1000) for \
+ b in range(1,a+1) if np.sqrt(a**2+b**2)%1==0] if c<1000]).mode[0]
 
 #%% Problem 40
 #join the list of string range, set it to a, and look for the bth item in the list, and multiply them up
 np.product([[int(a[10**b-1]) for b in range(7)] for a in [''.join([str(a) for a in range(1,1000000)])]][0])
 
 #%% Problem 41
-#first we generate the value of n in a, make the digits with b, and then get the permutations in a flattened list with c and d, which we filter for primes with e
-max([e for e in [int(''.join(d)) for c in [list(it.permutations([str(b) for b in range(1,a)])) for a in range(2,10)] for d in c] if sp.isprime(e)])
+#first we generate the value of n in a, make the digits with b, and then get 
+#the permutations in a flattened list with c and d, which we filter for primes with e
+max([e for e in [int(''.join(d)) for c in [list(it.permutations([str(b) for b \
+ in range(1,a)])) for a in range(2,10)] for d in c] if sp.isprime(e)])
 
 #%% Problem 42
-#we get the words with a, the value of each letter with b, filter with c for the triangle numbers found with d
-len([c for c in [np.sum([ascii_uppercase.index(b)+1 for b in a]) for a in re.findall('\w+',open('words.txt').read())] if c in [np.sum(range(d)) for d in range(1,21)]])
+#we get the words with a, the value of each letter with b, filter with c for the 
+#triangle numbers found with d
+len([c for c in [np.sum([ascii_uppercase.index(b)+1 for b in a]) for a in \
+ re.findall('\w+',open('words.txt').read())] if c in [np.sum(range(d)) for \
+ d in range(1,21)]])
 
 #%% Problem 43
-#find the permutations of a with b, doing some quick filtering to cut down the possibilities by 10x, then check the modulo of the prime and position with d sums to zero, filtering on c.  then join, int, and sum.
-sum([int(''.join(c)) for c in tqdm([b for b in it.permutations([str(a) for a in range(10)]) if b[0]!='0' and b[3] in '02468' and b[5] in '05' ],position=0,leave=True) if np.sum([int(''.join(c[d+1:d+4]))%sp.prime(d+1) for d in [1,3,4,5,6]])==0])
+#find the permutations of a with b, doing some quick filtering to cut down the 
+#possibilities by 10x, then check the modulo of the prime and position with d 
+#sums to zero, filtering on c.  then join, int, and sum.
+sum([int(''.join(c)) for c in tqdm([b for b in it.permutations([str(a) for a in \
+ range(10)]) if b[0]!='0' and b[3] in '02468' and b[5] in '05' ],position=0, \
+ leave=True) if np.sum([int(''.join(c[d+1:d+4]))%sp.prime(d+1) for d in [1,3,4,5,6]])==0])
 
 #%% Problem 44
-#the trick here is to store the list of pentagonal numbers in b, and then check it with the solution to the Pn equation for n.
-#the solution to the Pn equation is found with sp.var('Pn n');print(sp.solve(Pn-n*(3*n-1)/2,n)[1]) and you check if n%1==0 i.e. has no decimal component
-min([[c-d for c in tqdm(b,position=0) for d in [e for e in b if e<c] if all([(np.sqrt(24*(c+d*f) + 1)+1)/6%1==0 for f in [-1,1]]) ] for b in [[a*(3*a-1)//2 for a in range(1,2200)]]][0])
+#the trick here is to store the list of pentagonal numbers in b, and then check
+#it with the solution to the Pn equation for n. The solution to the Pn equation 
+#is found with sp.var('Pn n');print(sp.solve(Pn-n*(3*n-1)/2,n)[1]) and you check 
+#if n%1==0 i.e. has no decimal component
+min([[c-d for c in tqdm(b,position=0) for d in [e for e in b if e<c] if \
+ all([(np.sqrt(24*(c+d*f) + 1)+1)/6%1==0 for f in [-1,1]]) ] for b in \
+ [[a*(3*a-1)//2 for a in range(1,2200)]]][0])
 
 #%% Problem 45
-# find the solutions to the equations with sp.var('Tn, Hn, n');print(sp.solve(Tn-n*(n+1)/2,n)[1]);print(sp.solve(Pn-n*(3*n-1)/2,n)[1]) and filter the hexagonal list
-min([c for c in [a*(2*a-1) for a in range(145,100000)] if all([b%1==0 for b in [(np.sqrt(8*c+1)-1)/2,(np.sqrt(24*c+1)+1)/6]])])
+# find the solutions to the equations with sp.var('Tn, Hn, n');print(sp.solve(
+# Tn-n*(n+1)/2,n)[1]);print(sp.solve(Pn-n*(3*n-1)/2,n)[1]) and filter the hexagonal list
+min([c for c in [a*(2*a-1) for a in range(145,100000)] if all([b%1==0 for b in \
+ [(np.sqrt(8*c+1)-1)/2,(np.sqrt(24*c+1)+1)/6]])])
 
 #%% Problem 46
-#list of non primes using a, and then checking if that number, d, is not in the list of all possible prime+ 2*squares
-min([d for d in tqdm([a for a in range(3,10000,2) if not sp.isprime(a)],position=0) if d not in [c+2*b**2 for b in range(1,int(np.sqrt(d))) for c in sp.primerange(1,d)]])
+#list of non primes using a, and then checking if that number, d, is not in the
+#list of all possible prime+ 2*squares
+min([d for d in tqdm([a for a in range(3,10000,2) if not sp.isprime(a)],position=0)
+ if d not in [c+2*b**2 for b in range(1,int(np.sqrt(d))) for c in sp.primerange(1,d)]])
 
 #%% Problem 47
-#first this generates a rolling window list (c) which we find the factors (f,l) along with the first number in the sequence (e,k), and we filter the flattened (h,i) list(j) and check that the number of factors is the same, after we check that they all have four factors (g)
-min([k for k,l in [[e,f] for e,f in [[c[0],[list(sp.factorint(d).items()) for d in c]] for c in tqdm([[a+b for a in range(4)] for b in range(2,300000)],position=0,leave=True)] if all([len(g)==len(f) for g in f])] if [len(j) == len(np.unique(j,axis=0)) for j in [[h for i in l for h in i]]][0]])
+#first this generates a rolling window list (c) which we find the factors (f,l) 
+# along with the first number in the sequence (e,k), and we filter the flattened (h,i) 
+# list(j) and check that the number of factors is the same, after we check that 
+# they all have four factors (g)
+min([k for k,l in [[e,f] for e,f in [[c[0],[list(sp.factorint(d).items()) for d in c]] \
+ for c in tqdm([[a+b for a in range(4)] for b in range(2,300000)],position=0,leave=True)]\
+ if all([len(g)==len(f) for g in f])] if [len(j) == len(np.unique(j,axis=0)) for j in \
+ [[h for i in l for h in i]]][0]])
 
 #%% Problem 48
 #python handles longs just fine in comprehensions
@@ -438,7 +476,9 @@ int(str(np.sum([a**a for a in range(1,1000)]))[-10:])
  if 1487 not in h][0]
 
 #%% Problem 50
-#first we make a list of primes (a), length of rolling window (b) and list of windows (c) then we filter the list to just primes (d,e), and store the result in f so that we can grab the maximum length (h) for the list and return the list at that index
+#first we make a list of primes (a), length of rolling window (b) and list of windows (c) 
+#then we filter the list to just primes (d,e), and store the result in f so that we can grab
+#the maximum length (h) for the list and return the list at that index
 [f[np.argmax([h for g,h in f])] for f in [[[d,e] for d,e in [[int(np.sum(a[c:c+b])),b]\
  for a in [list(sp.primerange(1,5000))] for b in range(1,1000) for c in range(len(a)-b)]\
  if d<10**6 and sp.isprime(d)]]][0][0]
@@ -540,4 +580,12 @@ sum([[int(o) for o,n in k] for k in [xt.nest(lambda h: [[j,*i] for i in h for j 
 #%% Problem 62
 #we gather by the sorted digits, then we look for the min.
 min([min(a) for a in xt.gather_by(np.arange(10000)**3,lambda x: str(sorted(str(x)))) if len(a)==5])
+
+#%% Problem 63
+#Since 9**99 is 95 digits long, we can stop at 100**x. then we look for the digits 1-9 powers
+#we raise the first number (b) to the power (a) and then for each item in the list check
+#that the length of the number (c) is equal to the power (d)
+np.sum([1 for c,d in [[b**a,a] for a in range(100) for b in range(1,11)] if len(str(c))==d])
+
+
 
