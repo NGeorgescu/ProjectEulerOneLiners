@@ -587,5 +587,24 @@ min([min(a) for a in xt.gather_by(np.arange(10000)**3,lambda x: str(sorted(str(x
 #that the length of the number (c) is equal to the power (d)
 np.sum([1 for c,d in [[b**a,a] for a in range(100) for b in range(1,11)] if len(str(c))==d])
 
+#%% Problem 64
+#first we construct a list of decimals (a) and for each of them we take the sqrt,
+#and then start nesting comprehensions until we reach a repeat of length 5 (i).
+#the repeat is calculated by trying every combination (e) up to the amount allowed
+#by the length of the list (d), wherein all of the repeats (f) must match.  Once
+#this list terminates, that testing algorithm runs again (g) to return the list of
+#repeats that work, the minimum repeat for each is taken, and then they are grouped
+#by positive and negative.  This code can be golfed some more by running the test
+#within the nest and exiting the nestwhile when this has a len.  This is left
+#as an excercise to the reader
+len(xt.group_by([[[np.where([all([all([g[-e-(f+1)*d]==g[-f*d -e] for f in \
+ range(i)]) for e in range(1,d+1)]) for d in range(1,len(g)//(i+1))])[0][0]+1 \
+ for g in [xt.nest_while(lambda b: [1/(b[0]-int(b[0])),[*b[1],int(b[0])]],[np.sqrt( \
+ Decimal(a)),[]], lambda c: not(any([all([all([c[1][-e-(f+1)*d]==c[1][-f*d -e] \
+ for f in range(i)]) for e in range(1,d+1)]) for d in range(6,len(c[1])//(i+1))] \
+ )))[1]]][0] for a in tqdm(range(10000), position=0,leave=True) if a not in \
+ np.arange(101)**2] for i in [5]][0],xt.odd_q)[True])
+
+                                               
 
 
