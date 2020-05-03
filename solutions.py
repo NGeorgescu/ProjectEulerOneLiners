@@ -605,6 +605,12 @@ len(xt.group_by([[[np.where([all([all([g[-e-(f+1)*d]==g[-f*d -e] for f in \
  )))[1]]][0] for a in tqdm(range(10000), position=0,leave=True) if a not in \
  np.arange(101)**2] for i in [5]][0],xt.odd_q)[True])
 
-                                               
+#%% Problem 65
+#we first make the list of continued fractions (a), and then use the nest
+#to chunk it down until (c) the list is gone. add the 1 for out front,
+#get the numerator, and then get the sum of the list of integers in the numerator
+sum(map(int,list(str((xt.nest_while(lambda b: [b[0][:-1],Fraction(b[0][-1]+ \
+ 1/b[1])],[list(it.chain(*[[1,1,2*a+2] for a in range(40)]))[:100],np.inf], \
+ lambda c: len(c[0]))[-1]+1).numerator))))
 
-
+#%%
