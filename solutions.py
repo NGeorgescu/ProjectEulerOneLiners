@@ -624,7 +624,6 @@ sum(map(int,list(str((xt.nest_while(lambda b: [b[0][:-1],Fraction(b[0][-1]+ \
 #if the convergent num**2-denom**2 evaluates to 1, then the nest_while terminates and
 #we return the numerator of the result (g) along with a. We sort and grab the largest
 #so you know what you're working with, 661 -> 16421658242965910275055840472270471049
-
 sorted([[[[a,g[0].numerator] for g in [xt.nest_while(lambda b: [1/(b[0]-int(b[0])), \
  [*b[1],int(b[0])],[[f,f.numerator**2-a*f.denominator**2] for f in [xt.nest_while( \
  lambda d: [d[0][:-1], d[0][-1]+Fraction(1/d[1])],[[*b[1],int(b[0])],np.inf], \
@@ -632,3 +631,9 @@ sorted([[[[a,g[0].numerator] for g in [xt.nest_while(lambda b: [1/(b[0]-int(b[0]
  if len(c[-1]) else False)[-1]]][0] for a in range(1000) if a not in np.arange(101)**2] \
  for i in [5]][0],key=xt.last)[-1][0]
 
+#%% Problem 67
+#just a nest where the last row is added to the preceding row, maxing it at each level
+#for every 2.  
+xt.nest(lambda c: c[:-2]+[[max(c[-1][d],c[-1][d+1])+e for d,e in enumerate(c[-2])]],
+ [[int(b) for b in a.split(' ')] for a in open('triangle.txt').read().split('\n')[:-1]]
+ ,99)[0][0]
