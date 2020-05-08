@@ -405,8 +405,10 @@ stats.mode([c for c in [int(a+b+np.sqrt(a**2+b**2)) for a in range(1,1000) for \
  b in range(1,a+1) if np.sqrt(a**2+b**2)%1==0] if c<1000]).mode[0]
 
 #%% Problem 40
-#join the list of string range, set it to a, and look for the bth item in the list, and multiply them up
-np.product([[int(a[10**b-1]) for b in range(7)] for a in [''.join([str(a) for a in range(1,1000000)])]][0])
+#join the list of string range, set it to a, and look for the bth item in the list, 
+#and multiply them up
+np.product([[int(a[10**b-1]) for b in range(7)] for a in [''.join([str(a) for a \
+ in range(1,1000000)])]][0])
 
 #%% Problem 41
 #first we generate the value of n in a, make the digits with b, and then get 
@@ -613,4 +615,22 @@ sum(map(int,list(str((xt.nest_while(lambda b: [b[0][:-1],Fraction(b[0][-1]+ \
  1/b[1])],[list(it.chain(*[[1,1,2*a+2] for a in range(40)]))[:100],np.inf], \
  lambda c: len(c[0]))[-1]+1).numerator))))
 
-#%%
+#%% Problem 66
+#This method really requirest the shortcut that everyone uses off of wikipedia
+#for solving pell's equation. I constructed a nest_while which produces three
+#parameters (b) for the number you're working on (a), the remainder, the continued
+#fraction, and the evaluation of the convergent of the continued fraction at that 
+#level which is itself a recursive nestwhile structure that works from the back
+#if the convergent num**2-denom**2 evaluates to 1, then the nest_while terminates and
+#we return the numerator of the result (g) along with a. We sort and grab the largest
+#so you know what you're working with, 661 -> 16421658242965910275055840472270471049
+
+sorted([[[[a,g[0].numerator] for g in [xt.nest_while(lambda b: [1/(b[0]-int(b[0])), \
+ [*b[1],int(b[0])],[[f,f.numerator**2-a*f.denominator**2] for f in [xt.nest_while( \
+ lambda d: [d[0][:-1], d[0][-1]+Fraction(1/d[1])],[[*b[1],int(b[0])],np.inf], \
+ lambda e:len(e[0])>0 )[1]]][0]],[np.sqrt(Decimal(a)),[]], lambda c: c[-1][-1]!=1 \
+ if len(c[-1]) else False)[-1]]][0] for a in range(1000) if a not in np.arange(101)**2] \
+ for i in [5]][0],key=xt.last)[-1][0]
+                                               
+
+    
