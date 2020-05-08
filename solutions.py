@@ -112,7 +112,7 @@ h="""08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 #representation and find the max of all of these using a four-item window
 np.max([np.max([[np.prod(r[j:j+4]) for j in range(len(r)-3)] for r in s]) for \
  s in [[np.array(n), np.array(n).T]+ [np.array([(l + [0*k for k in l])[m:]+ \
- (l + [0*k for k in l])[:m] for m,l in enumerate(o)]).T for o in [n,[[i for i \ 
+ (l + [0*k for k in l])[:m] for m,l in enumerate(o)]).T for o in [n,[[i for i \
  in j[::-1]] for j in np.array(n).T]]] for n in [[[int(j) for j in re.findall(r'\d+',\
  i)] for i in re.findall('.+',h)]]][0]])
 
@@ -496,7 +496,7 @@ int(str(np.sum([a**a for a in range(1,1000)]))[-10:])
 #lists of len 8. Then you get the smallest item from the list starting with the smallest item.
 np.unique([o for o in [[n for n in m if len(str(n))==len(str(m[-1]))] for m in \
  [[l for l in k if len(l)>=8] for k in [[[j for j in [int(re.sub('x',str(i),h)) \
- for i in range(10)] if sp.isprime(j)] for h in [''.join(d) for f in range(1,4) \ 
+ for i in range(10)] if sp.isprime(j)] for h in [''.join(d) for f in range(1,4) \
  for g in range(1,4) for e in [it.permutations([*b,*['x' for c in range(f)]]) \
  for b in list(it.combinations_with_replacement([str(a) for a in range(10)],g))] \
  for d in e]]]][0]] if len(o)>=8],axis=0)[0,0]
@@ -631,6 +631,4 @@ sorted([[[[a,g[0].numerator] for g in [xt.nest_while(lambda b: [1/(b[0]-int(b[0]
  lambda e:len(e[0])>0 )[1]]][0]],[np.sqrt(Decimal(a)),[]], lambda c: c[-1][-1]!=1 \
  if len(c[-1]) else False)[-1]]][0] for a in range(1000) if a not in np.arange(101)**2] \
  for i in [5]][0],key=xt.last)[-1][0]
-                                               
 
-    
