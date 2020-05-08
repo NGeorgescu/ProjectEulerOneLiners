@@ -637,3 +637,19 @@ sorted([[[[a,g[0].numerator] for g in [xt.nest_while(lambda b: [1/(b[0]-int(b[0]
 xt.nest(lambda c: c[:-2]+[[max(c[-1][d],c[-1][d+1])+e for d,e in enumerate(c[-2])]],
  [[int(b) for b in a.split(' ')] for a in open('triangle.txt').read().split('\n')[:-1]]
  ,99)[0][0]
+
+
+#%% Problem 68
+#We make sure f< all of ghij and the five spokes and the len(l) checks that it's 16
+#     f
+#       a  g
+#     e   b
+#   j  d c h
+#       i
+max([int(l) for l in [''.join([str(k) for k in [f,a,b,g,b,c,h,c,d,i,d,e,j,e,a]]) \
+ for a,b,c,d,e,f,g,h,i,j in list(it.permutations(range(1,11))) if all(f<np.array( \
+ [g,h,i,j])) and all(0==np.ediff1d([f+a+b,g+b+c,h+c+d,i+d+e,j+e+a]))] if len(l)==16])
+
+
+
+
