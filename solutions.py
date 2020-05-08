@@ -652,4 +652,3 @@ max([int(l) for l in [''.join([str(k) for k in [f,a,b,g,b,c,h,c,d,i,d,e,j,e,a]])
 
 
 
-
