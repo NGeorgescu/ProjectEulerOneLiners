@@ -652,3 +652,14 @@ max([int(l) for l in [''.join([str(k) for k in [f,a,b,g,b,c,h,c,d,i,d,e,j,e,a]])
 
 
 
+#%% Problem 69
+#is sympy cheating at this point?
+max(range(1,1+10**6),key=lambda a: a/sp.ntheory.factor_.totient(a))
+
+#%% Problem 70
+
+min([a for a in tqdm(range(2,10**7),position=0,leave=True) if sorted(str(a))== \
+ sorted(str(sp.ntheory.factor_.totient(a)))], key = lambda b: b/sp.ntheory.factor_.totient(b))
+
+
+
