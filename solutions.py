@@ -664,4 +664,8 @@ min([a for a in tqdm(range(2,10**7),position=0,leave=True) if sorted(str(a))== \
 [sorted([[b,c] for b,c in tqdm(zip((a*3//7),a),position=0,leave=True) if 
  sp.gcd(b,c)==1],key=lambda d: d[0]/d[1]) for a in [np.arange(8,10**6)]][0][-1][0]
 
+#%% Problem 72
+#The totient tells us how many numbers smaller are relative primes so if you sum them up
+#that should be the right answer.
+sum([sp.ntheory.factor_.totient(a) for a in tqdm(range(2,1+10**6),position=0,leave=True)])
 
