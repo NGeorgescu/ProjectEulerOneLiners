@@ -638,7 +638,6 @@ xt.nest(lambda c: c[:-2]+[[max(c[-1][d],c[-1][d+1])+e for d,e in enumerate(c[-2]
  [[int(b) for b in a.split(' ')] for a in open('triangle.txt').read().split('\n')[:-1]]
  ,99)[0][0]
 
-
 #%% Problem 68
 #We make sure f< all of ghij and the five spokes and the len(l) checks that it's 16
 #     f
@@ -650,16 +649,19 @@ max([int(l) for l in [''.join([str(k) for k in [f,a,b,g,b,c,h,c,d,i,d,e,j,e,a]])
  for a,b,c,d,e,f,g,h,i,j in list(it.permutations(range(1,11))) if all(f<np.array( \
  [g,h,i,j])) and all(0==np.ediff1d([f+a+b,g+b+c,h+c+d,i+d+e,j+e+a]))] if len(l)==16])
 
-
-
 #%% Problem 69
 #is sympy cheating at this point?
 max(range(1,1+10**6),key=lambda a: a/sp.ntheory.factor_.totient(a))
 
 #%% Problem 70
-
+#a checks if it's a permutation, 
 min([a for a in tqdm(range(2,10**7),position=0,leave=True) if sorted(str(a))== \
  sorted(str(sp.ntheory.factor_.totient(a)))], key = lambda b: b/sp.ntheory.factor_.totient(b))
 
+#%% Problem 71
+#I tried to save a little time with the array math (a).  There's no getting around
+#checking with gcd, sorting, and then finding the findal result.  Or maybe there is...
+[sorted([[b,c] for b,c in tqdm(zip((a*3//7),a),position=0,leave=True) if 
+ sp.gcd(b,c)==1],key=lambda d: d[0]/d[1]) for a in [np.arange(8,10**6)]][0][-1][0]
 
 
