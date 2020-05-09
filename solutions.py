@@ -679,3 +679,14 @@ len([b for a in tqdm(range(1,12001),position=0,leave=True) for b in \
 #we nest a function that does the stuff, until a repeat is encountered.
 np.sum([len(xt.nest_while(lambda b: [*b,sum([sp.factorial(d) for d in str(b[-1])])],[a],
  lambda c: c[-1] not in c[:-1])[:-1])==60 for a in tqdm(range(3,10**6),position=0,leave=True)])
+
+
+#%% Problem 75
+#a controls the max, b the first parameter, c the second, which generates all
+#the primitive triples, which are multiplied by ranges in d. the 'variant' approach
+#as described int 'the generating pythagorean triples' wikipedia page is used
+#wherein the total length is m*(m+n) and odd triples are used. we use np.unique
+#to tally up the values and return tallies of 1 to add up the number
+np.sum(np.unique([d*(b**2+b*c) for a in [15*10**5] for b in range(1,2000,2) \
+ for c in range(1,b,2) if sp.gcd(c,b)==1 and b*(b+c)<a for d in range(1, \
+ int(np.ceil(a/(b**2+b*c)))) if d*(b**2+b*c)<=a],return_counts=True)[1]==1)
