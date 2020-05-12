@@ -696,5 +696,19 @@ xt.nest_while( lambda b: [b[0]+len([1 for e in range(1,min(b[1][-1])+1) if
  sum(b[1][-1])+e==100]),b[1][:-1]+[b[1][-1]+[e] for e in range(1,min(b[1][-1])+1)
  if sum(b[1][-1])+e<100]],[0,[[a] for a in list(range(1,100))]],lambda c: len(c[1])!=0)[0]
 
-                                   
-                                   
+#%% Problem 77                             
+#Same as the last problem but we nest it in another nestwhile structure which
+#increments the first term and will terminate only when the number possibilities
+#(held in the second term) goes over 5k
+xt.nest_while(lambda f: [f[0]+1,[f[0]+1,xt.nest_while( lambda b: [b[0]+len([1 
+ for e in sp.primerange(1,min(b[1][-1])+1) if sum(b[1][-1])+e==(f[0]+1)]),b[1][:-1]
+ +[b[1][-1]+[e] for e in sp.primerange(1,min(b[1][-1])+1) if sum(b[1][-1])+e<(f[0]+1)]]
+ ,[0,[[a] for a in list(sp.primerange(1,f[0]+1))]], lambda c: len(c[1])!=0)[0]]],
+ [3,[0,0]],lambda g: not g[1][1]>=5000)[0]
+                                        
+#%% Problem 78
+#so I put problem 76 in a for loop (plus 1 each time) and put that answer in the 
+#OEIS and ctrl+F'ed for 'python'. Turns out sympy has number of partitions built in.
+#thank goodness because this would have taken FOREVER to calculate.
+min(np.where(np.array([sp.ntheory.npartitions(i) for i in range(10**5)])%10**6==0)[0])
+
