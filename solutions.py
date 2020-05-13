@@ -712,3 +712,18 @@ xt.nest_while(lambda f: [f[0]+1,[f[0]+1,xt.nest_while( lambda b: [b[0]+len([1
 #thank goodness because this would have taken FOREVER to calculate.
 min(np.where(np.array([sp.ntheory.npartitions(i) for i in range(10**5)])%10**6==0)[0])
 
+#%% Problem 79
+#yeah I mean I could go into details but why?
+numbers = [319,680,180,690,129,620,762,689,762,318,368,710,720,710,629,168,160,689,
+           716,731,736,729,316,729,729,710,769,290,719,680,318,389,162,289,162,718,
+           729,319,790,680,890,362,319,760,316,729,380,319,728,716]
+min(list(it.chain(*[[[j for j in i if all([re.match('\\d*?'+'\\d*?'.join(list(k)) \
+ +'\\d*?',j) is not None for k in b])] for i in [[e[:g]+e[g+1:h]+e[h+1:] for h in \
+ range(len(e)) for g in range(h) if h!=g]+[e[:h]+e[h+1:] for h in range(len(e) \
+ +1)]]][0] for b in [[str(a) for a in numbers]] for e in tqdm([''.join(d) for d \
+ in list(it.chain(*[list(it.permutations(b,c)) for c in range(2,5)]))],leave=True, \
+ position=0) if all([re.match('\\d*?'+'\\d*?'.join(list(f))+'\\d*?',e) is not None \
+ for f in b])])),key=len)
+
+                     
+                     
