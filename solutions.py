@@ -730,5 +730,15 @@ min(list(it.chain(*[[[j for j in i if all([re.match('\\d*?'+'\\d*?'.join(list(k)
 sum([sum([int(b) for b in re.findall('\\d',str(np.sqrt(Decimal(a))))[:100]]) \
  for a in range(100) if a not in np.arange(11)**2])
 
+#%% Problem 81
+#made the rectangle a triange by first splitting the rows (a) and columns (b), 
+#and taking that array (c) and nesting it in the upper left quadrant of 3 other
+#copies of itself*infinity (d).  Then I took the rectangular arrangement
+#and made it a triangle, starting in the upper left, and moving diagonally 
+#down. 
+int(xt.nest(lambda c: c[:-2]+[[min(c[-1][d],c[-1][d+1])+e for d,e in enumerate(c[-2])]],
+ [[[d[f,e-f] for f in range(e+1)] for e in range(len(d)-1)] for c in [np.array([[int(b)
+ for b in a.split(',')] for a in open('matrix.txt').read().split('\n') if a!=''])] for d
+ in [np.vstack((np.hstack((c,c*np.inf)),np.hstack((c*np.inf,c*np.inf))))]][0],158)[0][0])
 
              
