@@ -723,7 +723,12 @@ min(list(it.chain(*[[[j for j in i if all([re.match('\\d*?'+'\\d*?'.join(list(k)
  +1)]]][0] for b in [[str(a) for a in numbers]] for e in tqdm([''.join(d) for d \
  in list(it.chain(*[list(it.permutations(b,c)) for c in range(2,5)]))],leave=True, \
  position=0) if all([re.match('\\d*?'+'\\d*?'.join(list(f))+'\\d*?',e) is not None \
- for f in b])])),key=len)
+ for f in b])])),key=len)                   
+            
+#%% Problem 80
+#a iterates through irrationals, regex gets first 100 digits, and the rest is history
+sum([sum([int(b) for b in re.findall('\\d',str(np.sqrt(Decimal(a))))[:100]]) \
+ for a in range(100) if a not in np.arange(11)**2])
 
-                     
-                     
+
+             
