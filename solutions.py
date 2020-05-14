@@ -3,6 +3,7 @@ import numpy as np
 import itertools as it
 import re
 import collatz
+import random
 import sympy as sp
 from tqdm import tqdm
 from scipy import stats
@@ -740,5 +741,34 @@ int(xt.nest(lambda c: c[:-2]+[[min(c[-1][d],c[-1][d+1])+e for d,e in enumerate(c
  [[[d[f,e-f] for f in range(e+1)] for e in range(len(d)-1)] for c in [np.array([[int(b)
  for b in a.split(',')] for a in open('matrix.txt').read().split('\n') if a!=''])] for d
  in [np.vstack((np.hstack((c,c*np.inf)),np.hstack((c*np.inf,c*np.inf))))]][0],158)[0][0])
+   
+#%% Problem 82
+[min([n[(len(c)-1,r)] for r in range(len(c))]) for c in [np.array([[int(b) for b
+ in a.split(',')] for a in open('matrix.txt').read().split('\n') if a!='']).T] for
+ n in [xt.nest_while(lambda d:[[d[0][:-1]+[m for l,m in k],{**d[1],**{tuple(m):l
+ for l,m in k}}] for k in [[[c[i,j]+d[1][(e,f)],[i,j]] for e,f in d[0][-1:] for i,j
+ in [[e+g,f+h] for g,h in [[0,1],[0,-1],[1,0]] if -1<e+g<len(c) and -1<f+h<len(c)]
+ if xt.check(lambda:c[i,j]+d[1][(e,f)]<d[1][(i,j)],lambda:True)]]][0],[[[0,q] for q
+ in range(len(c))],{(0,p):c[0,p] for p in range(len(c))}],lambda o: len(o[0])>0)[1]]][0]
 
-             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
