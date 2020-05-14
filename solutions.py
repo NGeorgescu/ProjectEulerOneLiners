@@ -769,8 +769,10 @@ int(''.join(['{:02}'.format(a[0]) for a in sorted(xt.tally(np.array(xt.nest_list
  sum(c))%40] for f in [{7:'ch',22:'ch',36:'ch',2:'cc',18:'cc',33:'cc',30:'g2j'}]][0]
  ,[10,0],10**7))[:,0]),key=xt.last,reverse=True)[:3]]))
 
-
-
+#%% Problem 85
+sorted([[a*b,sum([1 for c in np.arange(a) for d in np.arange(a-c)])*sum([1 for 
+ c in np.arange(b) for d in np.arange(b-c)])] for a in range(2,100) for b in 
+ range(1,a)],key = lambda e: abs(2*10**6-e[1]))[0]
 
 
 
