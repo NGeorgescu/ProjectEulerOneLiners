@@ -759,6 +759,16 @@ int(xt.nest(lambda c: c[:-2]+[[min(c[-1][d],c[-1][d+1])+e for d,e in enumerate(c
  g,h in [[0,1],[0,-1],[1,0],[-1,0]] if -1<e+g<len(c) and -1<f+h<len(c)] if 
  xt.check(lambda:c[i,j]+d[1][(e,f)]<d[1][(i,j)],lambda:True)]]][0],[[[0,0]],{(0,
  0):c[0,0]}],lambda o: len(o[0])>0)[1]]][0]
+    
+#%% Problem 84
+int(''.join(['{:02}'.format(a[0]) for a in sorted(xt.tally(np.array(xt.nest_list(
+ lambda b:[[10,0] if b[1]==2 and d else [xt.check(lambda:random.choice([0,10]+[e]*14)
+ if f[e]=='cc' else random.choice([0,10,11,24,39,5,{7:12,22:28,36:12}[e],e-3]+[{7:15,
+ 22:25,36:5}[e]]*2+[e]*6) if f[e]=='ch' else 10,lambda:e),b[1]+d if d else 0] for c in
+ [[random.randint(1,4),random.randint(1,4)]] for d in [c[0]==c[1]] for e in [(b[0]+
+ sum(c))%40] for f in [{7:'ch',22:'ch',36:'ch',2:'cc',18:'cc',33:'cc',30:'g2j'}]][0]
+ ,[10,0],10**7))[:,0]),key=xt.last,reverse=True)[:3]]))
+
 
 
 
