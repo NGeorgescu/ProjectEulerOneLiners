@@ -13,6 +13,7 @@ from decimal import Decimal, getcontext, ROUND_DOWN
 from inflect import engine
 from treys import Card, Evaluator
 import extended as xt
+import roman
 evaluator = Evaluator()
 getcontext().prec, getcontext().rounding  = 2000, ROUND_DOWN
 
@@ -794,10 +795,19 @@ sum(np.unique([xt.nest_while(lambda e: e+1,d, lambda f: sum([1 for b in
  f-sum([np.prod(c) for c in b])==d-len(b)])<1) for d in tqdm(range(2,12001),
  position=0,leave=True)]))
 
+#%% Problem 89
+[len(''.join(a.split()))-len(''.join([roman.toRoman(sum([{'M':1000,'m':900,'D':
+ 500,'d':400,'C':100,'c':90,'L':50,'l':40,'X':10,'x':9,'V':5,'v':4,'I':1}[e] for
+ e in list(d)])) for d in [xt.nest(lambda c: [c[0].replace(*list(b.items())[
+ c[1]]),c[1]+1],[a,0],6)[0] for b in [{'CM':'m','CD':'d','IV':'v','IX':'x','XL':
+ 'l','XC':'c'}]][0].split()])) for a in [open('roman.txt','r').read()]][0]
 
-
-
-
-
-
-
+#%% Problem 90
+sum([np.prod([h.count(6)%2+1 for h in [d[e],d[f]]]) for c in [[tuple([int(b) for
+ b in list('{:02d}'.format(a**2).replace('9','6'))]) for a in range(1,10)]] for
+ d in [list(set(it.combinations(sorted(list(range(9))+[6]),6)))] for e in range(
+ len(d)) for f in range(e) if all([g in list(sp.utilities.iterables.cartes(d[f],
+ d[e]))+list(sp.utilities.iterables.cartes(d[e],d[f])) for g in c])])
+                                                                           
+                                                                           
+                                                                           
