@@ -774,15 +774,13 @@ sorted([[a*b,sum([1 for c in np.arange(a) for d in np.arange(a-c)])*sum([1 for
  c in np.arange(b) for d in np.arange(b-c)])] for a in range(2,100) for b in 
  range(1,a)],key = lambda e: abs(2*10**6-e[1]))[0]
 
-
-
-
-
-
-
-
-
-
+#%% Problem 86
+xt.nest_while(lambda d: {'min':d['current'],'max':d['max'],'current':
+ int(np.mean([d['max'],d['current']]))} if sum([1 for a in tqdm(range(1,
+ d['current']+1)[::-1],position=0) for b in range(1,a+1) for c in range(1,b+1) 
+ if np.sqrt((c+b)**2 +a**2)%1==0])<10**6 else {'min':d['min'],'max':
+ d['current'],'current':int(np.mean([d['min'],d['current']]))},{'min':1000,'max':
+ 2000,'current':1500},lambda e: e['max']-e['min'] != 1)['max']
 
 
 
