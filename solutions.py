@@ -788,12 +788,11 @@ len(np.unique([a**2+b**3+c**4 for a in tqdm(list(sp.primerange(1,(50*10**6)**(1/
    for b in sp.primerange(1,(50*10**6-a**2)**(1/3))
    for c in sp.primerange(1,(50*10**6-a**2-b**3)**(1/4))]))
 
-
-
-
-
-
-
+#%% Problem 88
+sum(np.unique([xt.nest_while(lambda e: e+1,d, lambda f: sum([1 for b in 
+ sp.utilities.iterables.multiset_partitions(sp.factorint(f,multiple=True)) if 
+ f-sum([np.prod(c) for c in b])==d-len(b)])<1) for d in tqdm(range(2,12001),
+ position=0,leave=True)]))
 
 
 
