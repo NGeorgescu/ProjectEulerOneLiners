@@ -775,12 +775,23 @@ sorted([[a*b,sum([1 for c in np.arange(a) for d in np.arange(a-c)])*sum([1 for
  range(1,a)],key = lambda e: abs(2*10**6-e[1]))[0]
 
 #%% Problem 86
+#this runs much faster in pypy, just import math as np and define mean as sum(x)/len(x)
 xt.nest_while(lambda d: {'min':d['current'],'max':d['max'],'current':
  int(np.mean([d['max'],d['current']]))} if sum([1 for a in tqdm(range(1,
  d['current']+1)[::-1],position=0) for b in range(1,a+1) for c in range(1,b+1) 
  if np.sqrt((c+b)**2 +a**2)%1==0])<10**6 else {'min':d['min'],'max':
  d['current'],'current':int(np.mean([d['min'],d['current']]))},{'min':1000,'max':
  2000,'current':1500},lambda e: e['max']-e['min'] != 1)['max']
+
+#%% Problem 87
+len(np.unique([a**2+b**3+c**4 for a in tqdm(list(sp.primerange(1,(50*10**6)**(1/2))),position=0,leave=True) 
+   for b in sp.primerange(1,(50*10**6-a**2)**(1/3))
+   for c in sp.primerange(1,(50*10**6-a**2-b**3)**(1/4))]))
+
+
+
+
+
 
 
 
