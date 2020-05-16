@@ -808,6 +808,10 @@ sum([np.prod([h.count(6)%2+1 for h in [d[e],d[f]]]) for c in [[tuple([int(b) for
  d in [list(set(it.combinations(sorted(list(range(9))+[6]),6)))] for e in range(
  len(d)) for f in range(e) if all([g in list(sp.utilities.iterables.cartes(d[f],
  d[e]))+list(sp.utilities.iterables.cartes(d[e],d[f])) for g in c])])
-                                                                           
-                                                                           
-                                                                           
+
+#%% Problem 91
+sum([1 for a,b,c,d in it.product(range(51),repeat=4)         
+ for e,f,g in [sorted([a**2+b**2,(a-c)**2+(b-d)**2,c**2+d**2])]
+ if a+b>0 and c+d>0 and [a,b]!=[c,d] and e+f==g])//2
+
+
