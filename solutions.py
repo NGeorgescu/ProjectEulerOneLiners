@@ -814,4 +814,18 @@ sum([1 for a,b,c,d in it.product(range(51),repeat=4)
  for e,f,g in [sorted([a**2+b**2,(a-c)**2+(b-d)**2,c**2+d**2])]
  if a+b>0 and c+d>0 and [a,b]!=[c,d] and e+f==g])//2
 
+#%% Problem 92
+#this method generates a dictionary and calls itself. It is probably faster than 
+#a single loop which does the calculations all in one
+sum([89==xt.nest_while(lambda e: c[e],d,lambda f: not (f==1 or f==89)) for c in
+ [{a:sum([int(b)**2 for b in str(a)]) for a in tqdm(range(1,10**7),leave=True,position=0)}]
+ for d in tqdm(range(1,10**7),leave=True,position=0)])
 
+#%% Problem 93
+sorted([[''.join([str(k) for k in sorted(e)]),[min([j for j in range(1,max(i)+2)
+ if j not in i]) for i in [np.unique([int(h) for h in [d(f[3],d(f[2],d(f[1],f[0],
+ g[0]),g[1]),g[2]) for f in it.permutations(e) for g in it.product(range(6),
+ repeat=3)] if h is not None and h>0 and h==int(h)])]][0]] for d in [lambda a,b,c:
+ [a+b,a-b,b-a,a*b,a/b if b!=0 else None,b/a if a!=0 else None][c] if a is not None
+ and b is not None else None] for e in list(it.combinations(range(10), 4))],
+ key=xt.last)[-1][0]
