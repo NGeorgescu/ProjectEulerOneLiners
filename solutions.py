@@ -829,3 +829,10 @@ sorted([[''.join([str(k) for k in sorted(e)]),[min([j for j in range(1,max(i)+2)
  [a+b,a-b,b-a,a*b,a/b if b!=0 else None,b/a if a!=0 else None][c] if a is not None
  and b is not None else None] for e in list(it.combinations(range(10), 4))],
  key=xt.last)[-1][0]
+
+#%% Problem 95
+min(sorted([f for f in [xt.nest_while(lambda e: e+[xt.check(lambda: b[e[-1]])],
+ [c],lambda d: d[-1] is not None and d[-1] not in d[:-1]) for b in [{a:sum(
+ sp.divisors(a)[:-1]) for a in tqdm(range(10**6+1),position=0,leave=True)}] for 
+ c in tqdm(range(10**6+1),position=0,leave=True)] if f[-1] is not None],key=lambda
+ g: len(g)-g.index(g[-1]))[-1])
