@@ -878,6 +878,9 @@ sum([int(''.join([str(z) for z in y[0,:3]])) for y in [xt.nest(lambda f: [[
  for b in tqdm(a.split('Grid')[1:],position=0,leave=True) for e in [np.array([[
  int(d) for d in c] for c in b.split('\n')[1:-1]])]]])  
 
-#%%
+#%% Problem 97
+int(str(28433*2**7830457+1)[-10:])
+
+
 
 
