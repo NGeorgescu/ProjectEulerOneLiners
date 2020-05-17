@@ -836,3 +836,48 @@ min(sorted([f for f in [xt.nest_while(lambda e: e+[xt.check(lambda: b[e[-1]])],
  sp.divisors(a)[:-1]) for a in tqdm(range(10**6+1),position=0,leave=True)}] for 
  c in tqdm(range(10**6+1),position=0,leave=True)] if f[-1] is not None],key=lambda
  g: len(g)-g.index(g[-1]))[-1])
+
+
+#%% Problem 96 - Ungolfed
+sum(
+[int(''.join([str(z) for z in y[0,:3]])) for y in 
+ [
+ xt.nest(lambda f: [[
+     np.vstack([
+     g[:f[1]],[[w[x] for x in range(9)]],g[f[1]+1:]
+     ])
+   for g in f[0]
+   for l in [np.array([g[:3,:3],g[:3,3:6],g[:3,6:], g[3:6,:3],g[3:6,3:6],g[3:6,6:],g[6:,:3],g[6:,3:6],g[6:,6:]]).reshape([3,3,9])]
+   for p in [[h([k,l[f[1]//3,m//3],g[f[1]]]) for m,k in enumerate(g.T)]]
+   for q in [[n for n,o in enumerate(g[f[1]]) if o==0]]
+   for s in [[n for n,o in enumerate(g[f[1]]) if o!=0]]
+   for t in sp.utilities.iterables.cartes(*[p[r] for r in q])
+   for w in [{**dict(zip(q,t)),**{u:g[f[1]][u] for u in s}}]
+    if len(t)==len(np.unique(t))   
+   ],  
+  f[1]+1],([[e],0]),9)[0][0]
+ #find complement
+ for h in [lambda i: [j for j in range(1,10) if j not in sp.utilities.iterables.flatten(i)]]
+ for a in [open('sudoku.txt').read()+'\n']
+ for b in tqdm(a.split('Grid')[1:],position=0,leave=True)
+ for e in [np.array([[int(d) for d in c] for c in b.split('\n')[1:-1]])] 
+ ] 
+])  
+
+#%% Problem 96 - Golfed
+sum([int(''.join([str(z) for z in y[0,:3]])) for y in [xt.nest(lambda f: [[
+ np.vstack([g[:f[1]],[[w[x] for x in range(9)]],g[f[1]+1:]]) for g in f[0] for
+ l in [np.array([g[:3,:3],g[:3,3:6],g[:3,6:], g[3:6,:3],g[3:6,3:6],g[3:6,6:],
+ g[6:,:3],g[6:,3:6],g[6:,6:]]).reshape([3,3,9])] for p in [[h([k,l[f[1]//3,
+ m//3],g[f[1]]]) for m,k in enumerate(g.T)]] for q in [[n for n,o in 
+ enumerate(g[f[1]]) if o==0]] for s in [[n for n,o in enumerate(g[f[1]]) if 
+ o!=0]] for t in sp.utilities.iterables.cartes(*[p[r] for r in q]) for w in 
+ [{**dict(zip(q,t)),**{u:g[f[1]][u] for u in s}}]  if len(t)==len(np.unique(t))],
+ f[1]+1],([[e],0]),9)[0][0] for h in [lambda i: [j for j in range(1,10) if j not
+ in sp.utilities.iterables.flatten(i)]] for a in [open('sudoku.txt').read()+'\n']
+ for b in tqdm(a.split('Grid')[1:],position=0,leave=True) for e in [np.array([[
+ int(d) for d in c] for c in b.split('\n')[1:-1]])]]])  
+
+#%%
+
+
