@@ -881,6 +881,23 @@ sum([int(''.join([str(z) for z in y[0,:3]])) for y in [xt.nest(lambda f: [[
 #%% Problem 97
 int(str(28433*2**7830457+1)[-10:])
 
+#%% Problem 98
+max(it.chain(*[[int(q) for q in [''.join([o[n] for n in p]) for o in m for p in l]
+ if q in m] for l,m in [[[j for j in g if len(j)==i],[k for k in h if len(k)==i]]
+ for g in [list(it.chain(*[[[d[0].index(e) for e in d[1]],[d[1].index(e) for e in 
+ d[0]]] for d in sorted(list(it.chain(*[list(sp.utilities.iterables.subsets(b,2)) 
+ for b in xt.gather_by(re.findall('\\w+',open('words2.txt').read()),lambda a: 
+ ''.join(sorted(a))) if len(b)>1])),key=lambda c:len(c[0]))]))] for h in [[str(f)
+ for f in np.arange(10**5+1)**2 if len(set(str(f)))==len(list(str(f)))]] for i in
+ range(2,11)] if len(l)>0]))
+
+
+
+
+
+
+
+
 
 
 
