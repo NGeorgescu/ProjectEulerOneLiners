@@ -898,3 +898,6 @@ max(it.chain(*[[int(q) for q in [''.join([o[n] for n in p]) for o in m for p in 
  range(2,11)] if len(l)>0]))
 
 
+#%% Problem 99
+max([[c+1]+[int(b) for b in a.split(',')] for c,a in enumerate(open('base_exp.txt').read().split())],key=lambda d: d[1]**d[2])[0]
+
