@@ -901,3 +901,19 @@ max(it.chain(*[[int(q) for q in [''.join([o[n] for n in p]) for o in m for p in 
 #%% Problem 99
 max([[c+1]+[int(b) for b in a.split(',')] for c,a in enumerate(open('base_exp.txt').read().split())],key=lambda d: d[1]**d[2])[0]
 
+
+#%% Problem 100
+##this was more of a number theory problem than coding excercise.
+##If b is blue and t is total, then:
+##(b/t)*(b-1)/(t-q)==1/2
+##2b(b-1)=t(t-1)
+##in python we can use sympy to solve
+#sp.var('b t')
+#sp.solve(2*b*(b-1)-t*(t-1),t)[1]
+##finding roots for sqrt(8*b**2 - 8*b + 1)/2 + 1/2]
+#sp.solve(2*b*(b-1)-t*(t-1),t)[1]
+#[np.array([b,np.sqrt(8*b**2 - 8*b + 1)]).T for b in [np.arange(100)]]
+##from plugging in the oeis we find that roots follow [(sp.fibonacci(2*n + 1, 2) + 1)/2 for n in range(21)]
+##so the list of blue disks that work is there.  From there it follows
+
+[c for c,d in [[b,8*b**2 - 8*b + 1] for b in [int((sp.fibonacci(2*a + 1, 2) + 1)/2) for a in range(1,30)]] if d>(2*10**12-1)**2][0]
