@@ -830,6 +830,9 @@ sorted([[''.join([str(k) for k in sorted(e)]),[min([j for j in range(1,max(i)+2)
  and b is not None else None] for e in list(it.combinations(range(10), 4))],
  key=xt.last)[-1][0]
 
+#%% Problem 94
+sum([sum([a,a,a+b]) for a in tqdm(range(2,10**9//3+1),position=0,leave=True) for b in [-1,1] if sp.ntheory.primetest.is_square(4*a**2-((a+b))**2)])
+
 #%% Problem 95
 min(sorted([f for f in [xt.nest_while(lambda e: e+[xt.check(lambda: b[e[-1]])],
  [c],lambda d: d[-1] is not None and d[-1] not in d[:-1]) for b in [{a:sum(
@@ -837,8 +840,10 @@ min(sorted([f for f in [xt.nest_while(lambda e: e+[xt.check(lambda: b[e[-1]])],
  c in tqdm(range(10**6+1),position=0,leave=True)] if f[-1] is not None],key=lambda
  g: len(g)-g.index(g[-1]))[-1])
 
-
-#%% Problem 96 - Ungolfed
+#%% Problem 96
+#####################
+# Ungolfed vs Golfed#
+#####################
 sum(
 [int(''.join([str(z) for z in y[0,:3]])) for y in 
  [
@@ -864,7 +869,8 @@ sum(
  ] 
 ])  
 
-#%% Problem 96 - Golfed
+#################vs#################
+
 sum([int(''.join([str(z) for z in y[0,:3]])) for y in [xt.nest(lambda f: [[
  np.vstack([g[:f[1]],[[w[x] for x in range(9)]],g[f[1]+1:]]) for g in f[0] for
  l in [np.array([g[:3,:3],g[:3,3:6],g[:3,6:], g[3:6,:3],g[3:6,3:6],g[3:6,6:],
@@ -890,14 +896,5 @@ max(it.chain(*[[int(q) for q in [''.join([o[n] for n in p]) for o in m for p in 
  ''.join(sorted(a))) if len(b)>1])),key=lambda c:len(c[0]))]))] for h in [[str(f)
  for f in np.arange(10**5+1)**2 if len(set(str(f)))==len(list(str(f)))]] for i in
  range(2,11)] if len(l)>0]))
-
-
-
-
-
-
-
-
-
 
 
