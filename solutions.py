@@ -897,10 +897,8 @@ max(it.chain(*[[int(q) for q in [''.join([o[n] for n in p]) for o in m for p in 
  for f in np.arange(10**5+1)**2 if len(set(str(f)))==len(list(str(f)))]] for i in
  range(2,11)] if len(l)>0]))
 
-
 #%% Problem 99
 max([[c+1]+[int(b) for b in a.split(',')] for c,a in enumerate(open('base_exp.txt').read().split())],key=lambda d: d[1]**d[2])[0]
-
 
 #%% Problem 100
 ##this was more of a number theory problem than coding excercise.
@@ -915,5 +913,17 @@ max([[c+1]+[int(b) for b in a.split(',')] for c,a in enumerate(open('base_exp.tx
 #[np.array([b,np.sqrt(8*b**2 - 8*b + 1)]).T for b in [np.arange(100)]]
 ##from plugging in the oeis we find that roots follow [(sp.fibonacci(2*n + 1, 2) + 1)/2 for n in range(21)]
 ##so the list of blue disks that work is there.  From there it follows
-
 [c for c,d in [[b,8*b**2 - 8*b + 1] for b in [int((sp.fibonacci(2*a + 1, 2) + 1)/2) for a in range(1,30)]] if d>(2*10**12-1)**2][0]
+
+#%% Problem 101
+sum([sum([h*a**g for g,h in enumerate(xt.nest(lambda c: c+[xt.nest(np.ediff1d,
+ [f(b)-sum([d*b**(a-2-e) for e,d in enumerate(c)]) for b in range(1,a)],a-2-len(c)
+ )[0]/sp.factorial(a-2-len(c))],[],a-1)[::-1])]) for f in [lambda n: 1 - n + n**2
+ - n**3 + n**4 - n**5 + n**6 - n**7 + n**8 - n**9 + n**10] for a in  range(2,12)]) 
+
+
+
+
+
+
+
