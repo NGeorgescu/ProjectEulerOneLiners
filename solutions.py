@@ -8,12 +8,15 @@ import sympy as sp
 from tqdm import tqdm
 from scipy import stats
 from fractions import Fraction
+from shapely.geometry import Point
+from shapely.geometry import Polygon
 from string import ascii_uppercase
 from decimal import Decimal, getcontext, ROUND_DOWN
 from inflect import engine
 from treys import Card, Evaluator
 import extended as xt
 import roman
+import networkx as nx
 evaluator = Evaluator()
 getcontext().prec, getcontext().rounding  = 2000, ROUND_DOWN
 
@@ -790,54 +793,55 @@ len(np.unique([a**2+b**3+c**4 for a in tqdm(list(sp.primerange(1,(50*10**6)**(1/
    for c in sp.primerange(1,(50*10**6-a**2-b**3)**(1/4))]))
 
 #%% Problem 88
-sum(np.unique([xt.nest_while(lambda e: e+1,d, lambda f: sum([1 for b in 
- sp.utilities.iterables.multiset_partitions(sp.factorint(f,multiple=True)) if 
- f-sum([np.prod(c) for c in b])==d-len(b)])<1) for d in tqdm(range(2,12001),
+sum(np.unique([xt.nest_while(lambda e: e+1,d, lambda f: sum([1 for b in  \
+ sp.utilities.iterables.multiset_partitions(sp.factorint(f,multiple=True)) if  \
+ f-sum([np.prod(c) for c in b])==d-len(b)])<1) for d in tqdm(range(2,12001), \
  position=0,leave=True)]))
 
 #%% Problem 89
-[len(''.join(a.split()))-len(''.join([roman.toRoman(sum([{'M':1000,'m':900,'D':
- 500,'d':400,'C':100,'c':90,'L':50,'l':40,'X':10,'x':9,'V':5,'v':4,'I':1}[e] for
- e in list(d)])) for d in [xt.nest(lambda c: [c[0].replace(*list(b.items())[
- c[1]]),c[1]+1],[a,0],6)[0] for b in [{'CM':'m','CD':'d','IV':'v','IX':'x','XL':
+[len(''.join(a.split()))-len(''.join([roman.toRoman(sum([{'M':1000,'m':900,'D': \
+ 500,'d':400,'C':100,'c':90,'L':50,'l':40,'X':10,'x':9,'V':5,'v':4,'I':1}[e] for \
+ e in list(d)])) for d in [xt.nest(lambda c: [c[0].replace(*list(b.items())[ \
+ c[1]]),c[1]+1],[a,0],6)[0] for b in [{'CM':'m','CD':'d','IV':'v','IX':'x','XL': \
  'l','XC':'c'}]][0].split()])) for a in [open('roman.txt','r').read()]][0]
 
 #%% Problem 90
-sum([np.prod([h.count(6)%2+1 for h in [d[e],d[f]]]) for c in [[tuple([int(b) for
- b in list('{:02d}'.format(a**2).replace('9','6'))]) for a in range(1,10)]] for
- d in [list(set(it.combinations(sorted(list(range(9))+[6]),6)))] for e in range(
- len(d)) for f in range(e) if all([g in list(sp.utilities.iterables.cartes(d[f],
+sum([np.prod([h.count(6)%2+1 for h in [d[e],d[f]]]) for c in [[tuple([int(b) for \
+ b in list('{:02d}'.format(a**2).replace('9','6'))]) for a in range(1,10)]] for  \
+ d in [list(set(it.combinations(sorted(list(range(9))+[6]),6)))] for e in range( \
+ len(d)) for f in range(e) if all([g in list(sp.utilities.iterables.cartes(d[f], \
  d[e]))+list(sp.utilities.iterables.cartes(d[e],d[f])) for g in c])])
 
 #%% Problem 91
-sum([1 for a,b,c,d in it.product(range(51),repeat=4)         
- for e,f,g in [sorted([a**2+b**2,(a-c)**2+(b-d)**2,c**2+d**2])]
+sum([1 for a,b,c,d in it.product(range(51),repeat=4)          \
+ for e,f,g in [sorted([a**2+b**2,(a-c)**2+(b-d)**2,c**2+d**2])] \
  if a+b>0 and c+d>0 and [a,b]!=[c,d] and e+f==g])//2
 
 #%% Problem 92
 #this method generates a dictionary and calls itself. It is probably faster than 
 #a single loop which does the calculations all in one
-sum([89==xt.nest_while(lambda e: c[e],d,lambda f: not (f==1 or f==89)) for c in
- [{a:sum([int(b)**2 for b in str(a)]) for a in tqdm(range(1,10**7),leave=True,position=0)}]
- for d in tqdm(range(1,10**7),leave=True,position=0)])
+sum([89==xt.nest_while(lambda e: c[e],d,lambda f: not (f==1 or f==89)) for c in \
+ [{a:sum([int(b)**2 for b in str(a)]) for a in tqdm(range(1,10**7),leave=True, \
+ position=0)}] for d in tqdm(range(1,10**7),leave=True,position=0)])
 
 #%% Problem 93
-sorted([[''.join([str(k) for k in sorted(e)]),[min([j for j in range(1,max(i)+2)
- if j not in i]) for i in [np.unique([int(h) for h in [d(f[3],d(f[2],d(f[1],f[0],
- g[0]),g[1]),g[2]) for f in it.permutations(e) for g in it.product(range(6),
- repeat=3)] if h is not None and h>0 and h==int(h)])]][0]] for d in [lambda a,b,c:
- [a+b,a-b,b-a,a*b,a/b if b!=0 else None,b/a if a!=0 else None][c] if a is not None
+sorted([[''.join([str(k) for k in sorted(e)]),[min([j for j in range(1,max(i)+2) \
+ if j not in i]) for i in [np.unique([int(h) for h in [d(f[3],d(f[2],d(f[1],f[0], \
+ g[0]),g[1]),g[2]) for f in it.permutations(e) for g in it.product(range(6), \
+ repeat=3)] if h is not None and h>0 and h==int(h)])]][0]] for d in [lambda a,b,c: \
+ [a+b,a-b,b-a,a*b,a/b if b!=0 else None,b/a if a!=0 else None][c] if a is not None \
  and b is not None else None] for e in list(it.combinations(range(10), 4))],
  key=xt.last)[-1][0]
 
 #%% Problem 94
-sum([sum([a,a,a+b]) for a in tqdm(range(2,10**9//3+1),position=0,leave=True) for b in [-1,1] if sp.ntheory.primetest.is_square(4*a**2-((a+b))**2)])
+sum([sum([a,a,a+b]) for a in tqdm(range(2,10**9//3+1),position=0,leave=True) for\
+     b in [-1,1] if sp.ntheory.primetest.is_square(4*a**2-((a+b))**2)])
 
 #%% Problem 95
-min(sorted([f for f in [xt.nest_while(lambda e: e+[xt.check(lambda: b[e[-1]])],
- [c],lambda d: d[-1] is not None and d[-1] not in d[:-1]) for b in [{a:sum(
- sp.divisors(a)[:-1]) for a in tqdm(range(10**6+1),position=0,leave=True)}] for 
- c in tqdm(range(10**6+1),position=0,leave=True)] if f[-1] is not None],key=lambda
+min(sorted([f for f in [xt.nest_while(lambda e: e+[xt.check(lambda: b[e[-1]])], \
+ [c],lambda d: d[-1] is not None and d[-1] not in d[:-1]) for b in [{a:sum( \
+ sp.divisors(a)[:-1]) for a in tqdm(range(10**6+1),position=0,leave=True)}] for \
+ c in tqdm(range(10**6+1),position=0,leave=True)] if f[-1] is not None],key=lambda \
  g: len(g)-g.index(g[-1]))[-1])
 
 #%% Problem 96
@@ -871,30 +875,30 @@ sum(
 
 #################vs#################
 
-sum([int(''.join([str(z) for z in y[0,:3]])) for y in [xt.nest(lambda f: [[
- np.vstack([g[:f[1]],[[w[x] for x in range(9)]],g[f[1]+1:]]) for g in f[0] for
- l in [np.array([g[:3,:3],g[:3,3:6],g[:3,6:], g[3:6,:3],g[3:6,3:6],g[3:6,6:],
- g[6:,:3],g[6:,3:6],g[6:,6:]]).reshape([3,3,9])] for p in [[h([k,l[f[1]//3,
- m//3],g[f[1]]]) for m,k in enumerate(g.T)]] for q in [[n for n,o in 
- enumerate(g[f[1]]) if o==0]] for s in [[n for n,o in enumerate(g[f[1]]) if 
- o!=0]] for t in sp.utilities.iterables.cartes(*[p[r] for r in q]) for w in 
- [{**dict(zip(q,t)),**{u:g[f[1]][u] for u in s}}]  if len(t)==len(np.unique(t))],
- f[1]+1],([[e],0]),9)[0][0] for h in [lambda i: [j for j in range(1,10) if j not
- in sp.utilities.iterables.flatten(i)]] for a in [open('sudoku.txt').read()+'\n']
- for b in tqdm(a.split('Grid')[1:],position=0,leave=True) for e in [np.array([[
+sum([int(''.join([str(z) for z in y[0,:3]])) for y in [xt.nest(lambda f: [[ \
+ np.vstack([g[:f[1]],[[w[x] for x in range(9)]],g[f[1]+1:]]) for g in f[0] for \
+ l in [np.array([g[:3,:3],g[:3,3:6],g[:3,6:], g[3:6,:3],g[3:6,3:6],g[3:6,6:], \
+ g[6:,:3],g[6:,3:6],g[6:,6:]]).reshape([3,3,9])] for p in [[h([k,l[f[1]//3, \
+ m//3],g[f[1]]]) for m,k in enumerate(g.T)]] for q in [[n for n,o in \
+ enumerate(g[f[1]]) if o==0]] for s in [[n for n,o in enumerate(g[f[1]]) if \
+ o!=0]] for t in sp.utilities.iterables.cartes(*[p[r] for r in q]) for w in \
+ [{**dict(zip(q,t)),**{u:g[f[1]][u] for u in s}}]  if len(t)==len(np.unique(t))], \
+ f[1]+1],([[e],0]),9)[0][0] for h in [lambda i: [j for j in range(1,10) if j not \
+ in sp.utilities.iterables.flatten(i)]] for a in [open('sudoku.txt').read()+'\n'] \
+ for b in tqdm(a.split('Grid')[1:],position=0,leave=True) for e in [np.array([[ \
  int(d) for d in c] for c in b.split('\n')[1:-1]])]]])  
 
 #%% Problem 97
 int(str(28433*2**7830457+1)[-10:])
 
 #%% Problem 98
-max(it.chain(*[[int(q) for q in [''.join([o[n] for n in p]) for o in m for p in l]
- if q in m] for l,m in [[[j for j in g if len(j)==i],[k for k in h if len(k)==i]]
- for g in [list(it.chain(*[[[d[0].index(e) for e in d[1]],[d[1].index(e) for e in 
- d[0]]] for d in sorted(list(it.chain(*[list(sp.utilities.iterables.subsets(b,2)) 
- for b in xt.gather_by(re.findall('\\w+',open('words2.txt').read()),lambda a: 
- ''.join(sorted(a))) if len(b)>1])),key=lambda c:len(c[0]))]))] for h in [[str(f)
- for f in np.arange(10**5+1)**2 if len(set(str(f)))==len(list(str(f)))]] for i in
+max(it.chain(*[[int(q) for q in [''.join([o[n] for n in p]) for o in m for p in l]\
+ if q in m] for l,m in [[[j for j in g if len(j)==i],[k for k in h if len(k)==i]] \
+ for g in [list(it.chain(*[[[d[0].index(e) for e in d[1]],[d[1].index(e) for e in \
+ d[0]]] for d in sorted(list(it.chain(*[list(sp.utilities.iterables.subsets(b,2)) \
+ for b in xt.gather_by(re.findall('\\w+',open('words2.txt').read()),lambda a: \
+ ''.join(sorted(a))) if len(b)>1])),key=lambda c:len(c[0]))]))] for h in [[str(f) \
+ for f in np.arange(10**5+1)**2 if len(set(str(f)))==len(list(str(f)))]] for i in \
  range(2,11)] if len(l)>0]))
 
 #%% Problem 99
@@ -913,13 +917,18 @@ max([[c+1]+[int(b) for b in a.split(',')] for c,a in enumerate(open('base_exp.tx
 #[np.array([b,np.sqrt(8*b**2 - 8*b + 1)]).T for b in [np.arange(100)]]
 ##from plugging in the oeis we find that roots follow [(sp.fibonacci(2*n + 1, 2) + 1)/2 for n in range(21)]
 ##so the list of blue disks that work is there.  From there it follows
-[c for c,d in [[b,8*b**2 - 8*b + 1] for b in [int((sp.fibonacci(2*a + 1, 2) + 1)/2) for a in range(1,30)]] if d>(2*10**12-1)**2][0]
+[c for c,d in [[b,8*b**2 - 8*b + 1] for b in [int((sp.fibonacci(2*a + 1, 2) + 1)/2)\
+ for a in range(1,30)]] if d>(2*10**12-1)**2][0]
 
 #%% Problem 101
-sum([sum([h*a**g for g,h in enumerate(xt.nest(lambda c: c+[xt.nest(np.ediff1d,
- [f(b)-sum([d*b**(a-2-e) for e,d in enumerate(c)]) for b in range(1,a)],a-2-len(c)
- )[0]/sp.factorial(a-2-len(c))],[],a-1)[::-1])]) for f in [lambda n: 1 - n + n**2
+sum([sum([h*a**g for g,h in enumerate(xt.nest(lambda c: c+[xt.nest(np.ediff1d, \
+ [f(b)-sum([d*b**(a-2-e) for e,d in enumerate(c)]) for b in range(1,a)],a-2-len(c)\
+ )[0]/sp.factorial(a-2-len(c))],[],a-1)[::-1])]) for f in [lambda n: 1 - n + n**2 \
  - n**3 + n**4 - n**5 + n**6 - n**7 + n**8 - n**9 + n**10] for a in  range(2,12)]) 
+
+#%% Problem 102
+sum([Polygon(c).contains(Point(0,0)) for c in [xt.partition([int(b) for b in \
+ a.split(',')],2) for a in open('triangles.txt').read().split('\n')[:-1]]])
 
 
 
