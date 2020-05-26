@@ -930,9 +930,11 @@ sum([sum([h*a**g for g,h in enumerate(xt.nest(lambda c: c+[xt.nest(np.ediff1d, \
 sum([Polygon(c).contains(Point(0,0)) for c in [xt.partition([int(b) for b in \
  a.split(',')],2) for a in open('triangles.txt').read().split('\n')[:-1]]])
 
-
-
-
-
-
-
+#%% Problem 103
+''.join([str(o) for o in xt.nest_while(lambda a: [a[0]+1,[sorted(g) for i in \
+ [lambda j: all([sum(j[:l+1])>sum(j[-l:]) for l in range(1,1+len(j)//2)]) and \
+ [len(set(h))==len(h) for h in [[sum(k) for k in sp.utilities.iterables.subsets(j)\
+ ]]][0]] for g in [f+[a[0]-sum(f)] for f in xt.nest(lambda b:[d+[e] for d in b \
+ for e in range(max(d),a[0]) if sum(d)+e<a[0] and i(d+[e])],[[c] for c in \
+ range(1,a[0])],7-2)] if i(sorted(g))],print(a[0])] ,[200,[]],lambda n: not \
+ len(n[1])>0)[1][0]]) 
